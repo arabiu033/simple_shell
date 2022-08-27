@@ -36,14 +36,16 @@ char **_arguments(char *str, int n)
 
 /**
  * main - contains the main function of the program
+ * @argc: Arguments passed into the CLI
+ * @argv: Pointer to arguments string
  *
  * Description:  a super simple shell that can run commands
  * with their full path, without any argument.
  * Return: Always 0
  */
-int main(void)
+int main(__attribute__((unused)) int argc, char **argv)
 {
-	char **argv;
+	char **av;
 	int i = 0, n = 1, x;
 	pid_t xxx;
 	char command[50], ch;
@@ -63,22 +65,22 @@ int main(void)
 		}
 		if (ch == EOF)
 			break;
-		argv = _arguments(command, i);
+		av = _arguments(command, i);
 		xxx = fork();
 		if (xxx == -1)
 			return (-1);
 		if (xxx == 0)
 		{
 			if (execve(command, argv, NULL) == -1)
-				printf("%s Command not found\n", argv[0]);
+				printf("%s: No such file or directory\n", argv[0]);
 			exit(0);
 		}
 		else
 		{
 			wait(NULL);
 			for (x = 0; x < 2; x++)
-				free(argv[x]);
-			free(argv);
+				free(av[x]);
+			free(av);
 		}
 	}
 	return (0);
