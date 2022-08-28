@@ -10,4 +10,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+char *_strtok(char *str, const char *delim);
+
 #endif /* #define _SHELL_H_ */
