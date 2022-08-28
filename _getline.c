@@ -12,7 +12,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	ssize_t count = 0;
 	char c;
 
-	if (!lineptr || !(*n))
+	if (!(*lineptr) || !(*n))
 	{
 		*lineptr = realloc(*lineptr, 10);
 		*n = 10;
