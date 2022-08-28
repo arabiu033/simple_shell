@@ -27,6 +27,15 @@ char *_strtok(char *str, const char *delim)
 			holder = strchr(str, del);
 			holder = (holder + 1);
 			str[strCount] = '\0';
+			delimCount = 0;
+			while (delim[delimCount])
+			{
+				if (delim[delimCount++] == *holder)
+				{
+					holder = holder + 1;
+					delimCount = 0;
+				}
+			}
 			break;
 		}
 
