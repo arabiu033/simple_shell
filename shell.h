@@ -11,5 +11,6 @@
 #include <fcntl.h>
 
 char *_strtok(char *str, const char *delim);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 #endif /* #define _SHELL_H_ */
