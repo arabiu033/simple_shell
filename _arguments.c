@@ -7,45 +7,62 @@
  * @x: Number of words in the command
  * Return: pointer to argument string
  */
-char **_arguments(char *str, int n, int x)
+char **_arguments(char *str)
 {
-	char **s;
-	int i, len;
+	char **arrayOfArgs, **dummyPtr = NULL, *holder;
+	int numOfArgs = 1, count = 0, i = 0;
 
-	s = malloc(x + 1 * sizeof(char *));
-	if (s == NULL)
+	arrayOfArgs = malloc(sizeof(char *) * numOfArgs);
+	if (!arrayOfArgs)
 		return (NULL);
-	s[x] = NULL;
-	for (i = 0; i < x; i++)
+
+	holder = _strtok(str, " ");
+	while (holder)
 	{
-		/**
-		 * This is where strtok() comes in. n now becomes
-		 * the length of the tokens returned from strk()
-		 */
-		s[0] = malloc((n) * sizeof(char));
-		if (s[0] == NULL)
+		arrayOfArgs[count] = malloc(sizeof(*holder));
+		if (!arrayOfArgs[count])
 		{
-			for (i = 0; i <= x; i++)
-				free(s[i]);
-			free(s);
+			free_pointer(arrayOfArgs, count);
 			return (NULL);
 		}
-	}
-	len = n - 1;
-	for (i = 0; i < len; i++)
-	{
-		if (str[i] == ' ')
-		{
-			/**
-			 * This if statement might not be needed
-			 * when integrating strtok() into the function
-			 */
-			s[0][i] = '\0';
-			continue;
-		}
-		s[0][i] = str[i];
-	}
-	s[0][i] = '\0';
 
-	return (s);
+		for (i = 0; holder[i]; i++)
+			arrayOfArgs[count][i] = holder[i];
+
+		holder = _strtok(NULL, " ");
+
+		if (holder)
+			dummyPtr = (char **)
+				realloc(arrayOfArgs,
+					(++numOfArgs) * sizeof(*arrayOfArgs));
+		if(holder && !dummyPtr)
+		{
+			free_pointer(arrayOfArgs, count);
+			return (NULL);
+		}
+		if (dummyPtr)
+			arrayOfArgs = dummyPtr;
+		count++;
+	}
+	return (arrayOfArgs);
+}
+
+/**
+ * free_pointer - free the malloc space
+ * @ptr: pointer to free
+ * @count: size of pointer
+ * Return: void - nothing
+ */
+void free_pointer(char **ptr, int count)
+{
+	int i;
+
+	if (!count)
+	{
+		free(ptr);
+		return;
+	}
+	for (i = 0; i <= count; i++)
+		free(ptr[i]);
+	free(ptr);
 }

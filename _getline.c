@@ -30,6 +30,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 
 	} while (c != EOF && c != '\n');
 
+	((*lineptr)[strlen(*lineptr) - 1]) = '\0';
 	*n = (size_t) count;
 	return (count);
 }
