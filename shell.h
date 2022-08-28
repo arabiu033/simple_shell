@@ -12,5 +12,6 @@
 
 char *_strtok(char *str, const char *delim);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+char **_arguments(char *str, int n, int x);
 
 #endif /* #define _SHELL_H_ */
