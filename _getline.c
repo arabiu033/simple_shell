@@ -12,23 +12,23 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	ssize_t count = 0;
 	char c;
 
+
 	if (!(*lineptr) || !(*n))
 	{
 		*lineptr = malloc(sizeof(char) * 1);
-		memset(*lineptr, '\0', 1);
+
 		*n = 1;
 	}
 
 	do
 	{
 		c = getc(stream);
-		printf("%c\n", c);
 
 		if (c != EOF)
 			((*lineptr)[count++]) = c;
 		*lineptr = realloc(*lineptr, ++(*n));
 
-	} while (c != EOF && c != '\n');
+	} while (c != EOF  && c != '\n');
 
 	((*lineptr)[strlen(*lineptr) - 1]) = '\0';
 	*n = (size_t) count;
