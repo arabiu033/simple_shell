@@ -31,7 +31,8 @@ int main(__attribute__((unused)) int argc, char **argv)
 			return (-1);
 		if (fork_process == 0)
 		{
-			if (execve(args[0], args, NULL) == -1)
+			if (execve(args[0], args, NULL) == -1
+			    && !strcmp("\n", args[0]))
 				printf("%s: No such file or directory\n",
 				       argv[0]);
 			exit(0);
@@ -43,7 +44,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 				free(args[i]);
 			free(args[i + 1]);
 			free(args);
-			exit(1);
+			/* exit(1); */
 		}
 	}
 	return (0);

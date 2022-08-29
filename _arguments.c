@@ -3,8 +3,6 @@
 /**
  * _arguments - allocates memory for arguments
  * @str: the argument string
- * @n: length of str (including NULL byte)
- * @x: Number of words in the command
  * Return: pointer to argument string
  */
 char **_arguments(char *str)
@@ -37,7 +35,7 @@ char **_arguments(char *str)
 				realloc(arrayOfArgs,
 					(++numOfArgs) * sizeof(*arrayOfArgs));
 
-		if(holder && !dummyPtr)
+		if (holder && !dummyPtr)
 		{
 			free_pointer(arrayOfArgs, count);
 			return (NULL);
