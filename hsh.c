@@ -27,7 +27,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		if (!p)
 		{
 			printf("\n");
-			break;
+			return(0);
 		}
 		for (i = 0; command[i] == ' '; i++)
 			command = command + 1;
