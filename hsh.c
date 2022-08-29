@@ -32,7 +32,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		{
 			if (execve(args[0], args, NULL) == -1)
 				printf("%s: No such file or directory\n",
-				       args[0]);
+				       argv[0]);
 			exit(0);
 		}
 		else
