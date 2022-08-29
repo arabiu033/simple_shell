@@ -13,6 +13,7 @@ char **_arguments(char *str)
 	int numOfArgs = 2, count = 0, i = 0;
 
 	arrayOfArgs = malloc(sizeof(char *) * numOfArgs);
+	arrayOfArgs[1] = NULL;
 	if (!arrayOfArgs)
 		return (NULL);
 

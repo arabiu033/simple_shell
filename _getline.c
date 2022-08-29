@@ -14,8 +14,9 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 
 	if (!(*lineptr) || !(*n))
 	{
-		*lineptr = malloc(sizeof(char) * 10);
-		*n = 10;
+		*lineptr = malloc(sizeof(char) * 1);
+		memset(*lineptr, '\0', 1);
+		*n = 1;
 	}
 
 	do
@@ -24,9 +25,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 
 		if (c != EOF)
 			((*lineptr)[count++]) = c;
-
-		if (*n - count < 5)
-			*lineptr = realloc(*lineptr, 2 * *n);
+		*lineptr = realloc(*lineptr, ++(*n));
 
 	} while (c != EOF && c != '\n');
 

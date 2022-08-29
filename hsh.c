@@ -19,12 +19,13 @@ int main(__attribute__((unused)) int argc, char **argv)
 
 	while (x)
 	{
+		command = NULL;
 		printf("Amaterasu(<>) ");
 		_getline(&command, &size, stdin);
 		for (i = 0; command[i] == ' '; i++)
 			command = command + 1;
 		args = _arguments(command);
-
+		free(command);
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
@@ -32,14 +33,15 @@ int main(__attribute__((unused)) int argc, char **argv)
 		{
 			if (execve(args[0], args, NULL) == -1)
 				printf("%s: No such file or directory\n",
-				       args[0]);
+				       argv[0]);
 			exit(0);
 		}
 		else
 		{
 			wait(NULL);
-			for (i = 0; i < x; i++)
+			for (i = 0; args[i]; i++)
 				free(args[i]);
+			free(args[i + 1]);
 			free(args);
 		}
 	}
