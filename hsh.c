@@ -24,7 +24,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		for (i = 0; command[i] == ' '; i++)
 			command = command + 1;
 		args = _arguments(command);
-		free(command);
+
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
