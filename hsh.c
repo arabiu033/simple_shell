@@ -25,7 +25,10 @@ int main(__attribute__((unused)) int argc, char **argv)
 			printf("Amaterasu(<>) ");
 		p = _getline(&command, &size, stdin);
 		if (!p)
+		{
+			printf("\n");
 			break;
+		}
 		for (i = 0; command[i] == ' '; i++)
 			command = command + 1;
 		args = _arguments(command);
