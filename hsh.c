@@ -19,6 +19,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 
 	while (x)
 	{
+		command = NULL;
 		printf("Amaterasu(<>) ");
 		_getline(&command, &size, stdin);
 		for (i = 0; command[i] == ' '; i++)
@@ -38,9 +39,11 @@ int main(__attribute__((unused)) int argc, char **argv)
 		else
 		{
 			wait(NULL);
-			for (i = 0; i < x; i++)
+			for (i = 0; args[i]; i++)
 				free(args[i]);
+			free(args[i + 1]);
 			free(args);
+			exit(1);
 		}
 	}
 	return (0);
