@@ -34,15 +34,15 @@ int main(__attribute__((unused)) int argc, char **argv)
 			if (execve(args[0], args, NULL) == -1
 			    && !strcmp("\n", args[0]))
 				printf("%s: No such file or directory\n",
-				       argv[0]);
-			exit(0);
+				       args[0]);
+			exit (0);
 		}
 		else
 		{
 			wait(NULL);
 			for (i = 0; args[i]; i++)
 				free(args[i]);
-			free(args[i + 1]);
+			free(args[i]);
 			free(args);
 			/* exit(1); */
 		}
