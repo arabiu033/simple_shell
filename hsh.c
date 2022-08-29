@@ -43,6 +43,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 				free(args[i]);
 			free(args[i + 1]);
 			free(args);
+			exit(1);
 		}
 	}
 	return (0);
