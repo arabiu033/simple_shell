@@ -31,10 +31,9 @@ int main(__attribute__((unused)) int argc, char **argv)
 			return (-1);
 		if (fork_process == 0)
 		{
-			if (execve(args[0], args, NULL) == -1
-			    && !strcmp("\n", args[0]))
+			if (execve(args[0], args, NULL) == -1)
 				printf("%s: No such file or directory\n",
-				       args[0]);
+				       argv[0]);
 			exit (0);
 		}
 		else

@@ -23,7 +23,6 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 
 	do {
 		c = getc(stream);
-		printf("%c\n", c);
 
 		if (c != EOF)
 			((*lineptr)[count++]) = c;
