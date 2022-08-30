@@ -35,8 +35,6 @@ int main(__attribute__((unused)) int argc, char **argv)
 		if (p)
 			_puts("(<>) ");
 		p = _getline(&command, &size, stdin);
-		if (command[0] == '\n')
-			continue;
 		if (!p)
 		{
 			_puts("\n");
@@ -51,7 +49,8 @@ int main(__attribute__((unused)) int argc, char **argv)
 			return (-1);
 		if (fork_process == 0)
 		{
-			if (execve(args[0], args, NULL) == -1)
+			if (execve(args[0], args, NULL) == -1 &&
+			    args[0][0] != '\n')
 			{
 				/* create a separate function for the error message */
 				_puts(argv[0]);
