@@ -6,7 +6,7 @@ int main()
 
 	printf("Enter character: ");
 	c = _getc(stdin);
-	printf("Character entered: %d", c);
+	printf("Character entered: %c\n", c);
 
 	return (0);
 }
