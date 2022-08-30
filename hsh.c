@@ -1,6 +1,15 @@
 #include "shell.h"
 
 /**
+ * handle_sigint - signal handling for SIGINT
+ * @signum: SIGINT
+ */
+void handle_sigint(__attribute__((unused)) int signum)
+{
+	;
+}
+
+/**
  * main - contains the main function of the program
  * @argc: Arguments passed into the CLI
  * @argv: Pointer to arguments string
@@ -18,16 +27,20 @@ int main(__attribute__((unused)) int argc, char **argv)
 	ssize_t p = -1;
 	pid_t fork_process;
 
+	signal(SIGINT, handle_sigint);
+	signal(SIGTSTP, SIG_IGN);
 	while (x)
 	{
 		command = NULL;
 		if (p)
-			printf("Amaterasu(<>) ");
+			_puts("(<>) ");
 		p = _getline(&command, &size, stdin);
+		if (command[0] == '\n')
+			continue;
 		if (!p)
 		{
-			printf("\n");
-			return(0);
+			_puts("\n");
+			return (0);
 		}
 		for (i = 0; command[i] == ' '; i++)
 			command = command + 1;
@@ -38,18 +51,20 @@ int main(__attribute__((unused)) int argc, char **argv)
 			return (-1);
 		if (fork_process == 0)
 		{
-			printf("I am a child\n");
 			if (execve(args[0], args, NULL) == -1)
-				printf("%s: No such file or directory\n", argv[0]);
-			exit (0);
+			{
+				/* create a separate function for the error message */
+				_puts(argv[0]);
+				_puts(": \n");
+			}
+			exit(0);
 		}
-		else
-		{
-			wait(NULL);
-			for (i = 0; i <= x; i++)
-				free(args[i]);
-			free(args);
-		}
+		wait(NULL);
+		/* Create a separate function to free pointer */
+		for (i = 0; args[i]; i++)
+			free(args[i]);
+		free(args[i]);
+		free(args);
 	}
 	return (0);
 }
