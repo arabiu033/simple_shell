@@ -22,7 +22,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 	{
 		command = NULL;
 		if (p)
-			printf("Amaterasu(<>) ");
+			printf("%dAmaterasu(<>) ",getppid());
 		p = _getline(&command, &size, stdin);
 		if (!p)
 		{
@@ -38,10 +38,12 @@ int main(__attribute__((unused)) int argc, char **argv)
 			return (-1);
 		if (fork_process == 0)
 		{
+			printf("%d - child id", getpid());
+			printf("%d - parenit id", getppid());
 			if (execve(args[0], args, NULL) == -1)
 				printf("%s: No such file or directory\n",
 				       args[0]);
-
+			exit(0);
 		}
 		else
 		{
@@ -50,6 +52,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 				free(args[i]);
 			free(args);
 		}
+		++x;
 	}
 	return (0);
 }
