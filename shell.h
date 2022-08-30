@@ -20,10 +20,10 @@ char **_arguments(char *str);
 void free_pointer(char **ptr, int count);
 void _puts(char *str);
 int _putchar(char c);
-int _strcomp(char *s1, char *s2);
 int _strlen(char *s);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *_strchr(char *s, char c);
 char _getc(FILE *stream);
+char *_strpbrk(char *s, char *accept);
 
 #endif /* #define _SHELL_H_ */

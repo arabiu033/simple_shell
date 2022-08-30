@@ -1,27 +1,6 @@
 #include "shell.h"
 
 /**
- * strcomp - compares two strings if they are the same
- * @s1: string 1 (NULL terminated)
- * @s2: string 2 (NULL terminated)
- *
- * Return: 0 if equal
- */
-int _strcomp(char *s1, char *s2)
-{
-	int i, len_1 = _strlen(s1), len_2 = _strlen(s2);
-
-	if (len_1 == len_2)
-	{
-		for (i = 0; s1[i] == s2[i]; i++)
-			;
-		if (i == len_1)
-			return (0);
-	}
-	return (1);
-}
-
-/**
  * _strlen - returns the length of a string
  * @s: the string
  *
@@ -57,5 +36,32 @@ char *_strchr(char *s, char c)
 	}
 	if (*(s + i) == c)
 		return (s + i);
+	return (0);
+}
+
+/**
+ * _strpbrk - searches a string for any of a set of bytes
+ * @s: string
+ * @accept: string
+ *
+ * Return: pointer to the byte in s that matches
+ */
+
+char *_strpbrk(char *s, char *accept)
+{
+	unsigned int i, j;
+
+	for (i = 0; s[i]; i++)
+	{
+		for (j = 0; accept[j]; j++)
+		{
+			if (s[i] == accept[j])
+			{
+				break;
+			}
+		}
+		if (accept[j])
+			return (s + i);
+	}
 	return (0);
 }

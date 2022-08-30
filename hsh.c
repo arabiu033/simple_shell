@@ -52,11 +52,11 @@ int main(__attribute__((unused)) int argc, char **argv)
 		{
 			if (execve(args[0], args, NULL) == -1)
 			{
-				/* create a separate function for the error message */
-				_puts(argv[0]);
-				_puts(": \n");
-			}
+			/* create a separate function for the error message */
+			_puts(argv[0]);
+			_puts(": \n");
 			kill(getpid(), SIGQUIT);
+			}
 		}
 		wait(NULL);
 		/* Create a separate function to free pointer */
