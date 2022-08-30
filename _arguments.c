@@ -22,8 +22,7 @@ char **_arguments(char *str)
 		if (!arrayOfArgs[count])
 		{
 			free_pointer(arrayOfArgs, count);
-			perror("_arguments: Unable to allocate memory with malloc\n");
-			exit(97);
+			return (NULL);
 		}
 
 		for (i = 0; holder[i]; i++)
@@ -32,16 +31,9 @@ char **_arguments(char *str)
 		holder = _strtok(NULL, " ");
 
 		if (holder)
-		{
 			dummyPtr = (char **)
-				_realloc(arrayOfArgs,
+				realloc(arrayOfArgs,
 					(++numOfArgs) * sizeof(*arrayOfArgs));
-			if (dummyPtr == NULL)
-			{
-				perror("_arguments: Unable to reallocate memory with realloc\n");
-				exit(96);
-			}
-		}
 
 		if (holder && !dummyPtr)
 		{
