@@ -30,11 +30,13 @@ int main(__attribute__((unused)) int argc, char **argv)
 	signal(SIGTSTP, SIG_IGN);
 	while (x)
 	{
-		fflush(stdout);
+		fflush(0);
 		command = NULL;
 		if (atty)
 			_puts("(<>) ");
 		p = _getline(&command, &size, stdin);
+		if (command[0] == '\n')
+			continue;
 		if (!p)
 		{
 			if (atty)
@@ -50,8 +52,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 			return (-1);
 		if (fork_process == 0)
 		{
-			if (execve(args[0], args, NULL) == -1 &&
-			    args[0][0] != '\n')
+			if (execve(args[0], args, NULL) == -1)
 			{
 				/* create a separate function for the error message */
 				_puts(argv[0]);
