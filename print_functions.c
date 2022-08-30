@@ -31,3 +31,18 @@ int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
+
+/**
+ * _getc - Reads a character from file stream
+ * @stream: file stream to read from
+ *
+ * Return: The character read
+ */
+char _getc(__attribute__((unused)) FILE *stream)
+{
+	char c;
+
+	read(0, &c, 1);
+
+	return (c);
+}
