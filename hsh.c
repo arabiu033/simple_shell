@@ -30,12 +30,11 @@ int main(__attribute__((unused)) int argc, char **argv)
 	signal(SIGTSTP, SIG_IGN);
 	while (x)
 	{
-		fflush(stdout);
 		command = NULL;
 		if (atty)
 			_puts("(<>) ");
 		p = _getline(&command, &size, stdin);
-		if (command[0] == '\n')
+		if (p == -1)
 			continue;
 		if (!p)
 		{
@@ -43,8 +42,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 				_puts("\n");
 			return (0);
 		}
-		for (i = 0; command[i] == ' '; i++)
-			command = command + 1;
+
 		args = _arguments(command);
 		free(command);
 		fork_process = fork();

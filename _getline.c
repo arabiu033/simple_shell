@@ -12,24 +12,30 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	ssize_t count = 0;
 	char c;
 
-
 	if (!(*lineptr) || !(*n))
 	{
 		*lineptr = malloc(sizeof(char) * 10);
 		*n = 10;
+		((*lineptr)[0]) = '0';
 	}
 
 	do {
 		c = getc(stream);
 
-		if (c != EOF)
+		if (!count && c == ' ')
+			continue;
+		else if (!count && c == '\n')
+			return (-1);
+		else if (c != EOF)
 			((*lineptr)[count++]) = c;
+
 		if (*n - count < 5)
 			*lineptr = realloc(*lineptr, *n += 32);
 
 	} while (c != EOF  && c != '\n');
 
-	((*lineptr)[strlen(*lineptr) - 1]) = '\0';
+	if (((*lineptr)[strlen(*lineptr) - 1]) == '\n')
+		((*lineptr)[strlen(*lineptr) - 1]) = '\0';
 	*n = (size_t) count;
 	return (count);
 }
