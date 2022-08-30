@@ -24,7 +24,7 @@ char *_strtok(char *str, const char *delim)
 		}
 		if (t)
 		{
-			holder = strchr(str, del);
+			holder = _strchr(str, del);
 			holder = (holder + 1);
 			str[strCount] = '\0';
 			delimCount = 0;

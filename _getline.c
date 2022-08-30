@@ -16,7 +16,12 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	if (!(*lineptr) || !(*n))
 	{
 		*lineptr = malloc(sizeof(char) * 10);
+		if (*lineptr == NULL)
+		{
+			perror("In _getline.c: Unable to allocate memory with malloc");
 		*n = 10;
+		exit(98);
+		}
 	}
 
 	do {
@@ -25,7 +30,14 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 		if (c != EOF)
 			((*lineptr)[count++]) = c;
 		if (*n - count < 5)
-			*lineptr = realloc(*lineptr, *n += 32);
+		{
+			*lineptr = _realloc(*lineptr, *n += 32);
+			if (*lineptr == NULL)
+			{
+				perror("In _getline.c: Unable to reallocate memory with realloc\n");
+				exit(99);
+			}
+		}
 
 	} while (c != EOF  && c != '\n');
 

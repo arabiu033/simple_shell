@@ -22,5 +22,7 @@ void _puts(char *str);
 int _putchar(char c);
 int _strcomp(char *s1, char *s2);
 int _strlen(char *s);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char *_strchr(char *s, char c);
 
 #endif /* #define _SHELL_H_ */
