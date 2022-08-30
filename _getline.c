@@ -16,12 +16,10 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	if (!(*lineptr) || !(*n))
 	{
 		*lineptr = malloc(sizeof(char) * 1);
-
 		*n = 1;
 	}
 
-	do
-	{
+	do {
 		c = getc(stream);
 
 		if (c != EOF)

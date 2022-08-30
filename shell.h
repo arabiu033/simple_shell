@@ -10,10 +10,15 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stddef.h>
+#include <signal.h>
 
 char *_strtok(char *str, const char *delim);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 char **_arguments(char *str);
 void free_pointer(char **ptr, int count);
+void _puts(char *str);
+int _putchar(char c);
+int _strcomp(char *s1, char *s2);
+int _strlen(char *s);
 
 #endif /* #define _SHELL_H_ */
