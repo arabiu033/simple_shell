@@ -16,43 +16,39 @@ int main(__attribute__((unused)) int argc, char **argv)
 	char *command = NULL;
 	int x = 1, i;
 	ssize_t p = -1;
-	pid_t fork_process;
-
+	pid_t pid;
+	int y = isatty(0);
 	while (x)
 	{
 		command = NULL;
-		if (p)
-			printf("%dAmaterasu(<>) ",getppid());
+		if (y)
+			printf("Amaterasu(<>) ");
 		p = _getline(&command, &size, stdin);
 		if (!p)
 		{
-			printf("\n");
+			if (y)
+				printf("\n");
 			return(0);
 		}
 		for (i = 0; command[i] == ' '; i++)
 			command = command + 1;
 		args = _arguments(command);
 		free(command);
-		fork_process = fork();
-		if (fork_process == -1)
-			return (-1);
-		if (fork_process == 0)
+
+		if ((pid = fork()) == 0)
 		{
-			printf("%d - child id", getpid());
-			printf("%d - parenit id", getppid());
 			if (execve(args[0], args, NULL) == -1)
 				printf("%s: No such file or directory\n",
 				       args[0]);
-			exit(0);
+			kill(getpid(), 3);
 		}
 		else
 		{
 			wait(NULL);
-			for (i = 0; i <= x; i++)
+			for (i = 0; args[i]; i++)
 				free(args[i]);
 			free(args);
 		}
-		++x;
 	}
 	return (0);
 }
