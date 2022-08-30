@@ -30,19 +30,19 @@ int main(__attribute__((unused)) int argc, char **argv)
 	signal(SIGTSTP, SIG_IGN);
 	while (x)
 	{
-		fflush(stdout);
 		command = NULL;
 		if (atty)
 			_puts("(<>) ");
 		p = _getline(&command, &size, stdin);
+		if (p == -1)
+			continue;
 		if (!p)
 		{
 			if (atty)
 				_puts("\n");
 			return (0);
 		}
-		for (i = 0; command[i] == ' '; i++)
-			command = command + 1;
+
 		args = _arguments(command);
 		free(command);
 		fork_process = fork();
@@ -50,8 +50,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 			return (-1);
 		if (fork_process == 0)
 		{
-			if (execve(args[0], args, NULL) == -1 &&
-			    args[0][0] != '\n')
+			if (execve(args[0], args, NULL) == -1)
 			{
 				/* create a separate function for the error message */
 				_puts(argv[0]);
