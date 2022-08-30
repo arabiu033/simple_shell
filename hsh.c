@@ -38,10 +38,9 @@ int main(__attribute__((unused)) int argc, char **argv)
 			return (-1);
 		if (fork_process == 0)
 		{
+			printf("I am a child\n");
 			if (execve(args[0], args, NULL) == -1)
-				printf("%s: No such file or directory\n",
-
-				       argv[0]);
+				printf("%s: No such file or directory\n", argv[0]);
 			exit (0);
 		}
 		else
@@ -50,7 +49,6 @@ int main(__attribute__((unused)) int argc, char **argv)
 			for (i = 0; i <= x; i++)
 				free(args[i]);
 			free(args);
-			/* exit(1); */
 		}
 	}
 	return (0);

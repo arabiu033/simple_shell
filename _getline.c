@@ -16,10 +16,6 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	if (!(*lineptr) || !(*n))
 	{
 		*lineptr = malloc(sizeof(char) * 1);
-<<<<<<< HEAD
-=======
-
->>>>>>> 789cee18509e65c57388d8e9557a1cffdec06d46
 		*n = 1;
 	}
 
