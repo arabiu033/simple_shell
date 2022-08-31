@@ -40,5 +40,6 @@ char _getc(FILE *stream);
 char *_strstr(char *haystack, char *needle);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
+lp linked_list(char *str);
 
 #endif /* #define _SHELL_H_ */
