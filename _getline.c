@@ -30,7 +30,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 			((*lineptr)[count++]) = c;
 
 		if (*n - count < 5)
-			*lineptr = _realloc(*lineptr,*n, *n += 32);
+			*lineptr = _realloc(*lineptr,*n, (*n += 32));
 
 	} while (c != EOF  && c != '\n');
 
