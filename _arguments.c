@@ -32,8 +32,8 @@ char **_arguments(char *str)
 
 		if (holder)
 			dummyPtr = (char **)
-				realloc(arrayOfArgs,
-					 (++numOfArgs) * sizeof(*arrayOfArgs));
+				_realloc(arrayOfArgs, numOfArgs,
+					(++numOfArgs) * sizeof(*arrayOfArgs));
 
 		if (holder && !dummyPtr)
 		{
