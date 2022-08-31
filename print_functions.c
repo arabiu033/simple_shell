@@ -52,9 +52,9 @@ char _getc(__attribute__((unused)) FILE *stream)
  */
 void error_message(int p, char *s)
 {
-	_puts("sh: ");
+	_puts("hsh: ");
 	print_number(p);
 	_puts(": ");
 	_puts(s);
-	_puts("not found\n");
+	_puts(" not found\n");
 }
