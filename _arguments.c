@@ -8,7 +8,7 @@
 char **_arguments(char *str)
 {
 	char **arrayOfArgs, **dummyPtr = NULL, *holder;
-	int numOfArgs = 2, count = 0, i = 0;
+	int numOfArgs = 2, count = 0, i = 0, newSize;
 
 	arrayOfArgs = malloc(sizeof(char *) * numOfArgs);
 	arrayOfArgs[1] = NULL;
@@ -31,9 +31,12 @@ char **_arguments(char *str)
 		holder = _strtok(NULL, " ");
 
 		if (holder)
+		{
+			newSize = ++numOfArgs;
 			dummyPtr = (char **)
 				_realloc(arrayOfArgs, numOfArgs,
-					 (++numOfArgs) * sizeof(*arrayOfArgs));
+					 (newSize) * sizeof(*arrayOfArgs));
+		}
 
 		if (holder && !dummyPtr)
 		{
