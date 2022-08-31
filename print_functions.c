@@ -17,7 +17,6 @@ void _puts(char *str)
 		_putchar(ch);
 		++i;
 	}
-	/* _putchar('\n'); */
 }
 
 /**
@@ -45,4 +44,17 @@ char _getc(__attribute__((unused)) FILE *stream)
 	read(0, &c, 1);
 
 	return (c);
+}
+
+/**
+ * error_message - prints error message for invalid command
+ * @p: process number
+ */
+void error_message(int p, char *s)
+{
+	_puts("sh: ");
+	write(1, &p, 4);
+	_puts(": ");
+	_puts(s);
+	_puts("not found\n");
 }

@@ -22,7 +22,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 {
 	char **args, *command = NULL;
 	size_t size = 0;
-	int x = 1, i, atty = isatty(0);
+	int x = 1, i, atty = isatty(0), process_num = 0;
 	ssize_t p = -1;
 	pid_t fork_process;
 
@@ -52,10 +52,9 @@ int main(__attribute__((unused)) int argc, char **argv)
 		{
 			if (execve(args[0], args, NULL) == -1)
 			{
-			/* create a separate function for the error message */
-			_puts(argv[0]);
-			_puts(": \n");
-			kill(getpid(), SIGQUIT);
+				process_num++;
+				error_message(p, argv[0]);
+				kill(getpid(), SIGQUIT);
 			}
 		}
 		wait(NULL);

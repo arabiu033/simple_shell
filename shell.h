@@ -14,6 +14,7 @@
 #include <signal.h>
 
 #define SIGQUIT 3   /* Quit the process */
+extern char **environ;
 
 /**
  * struct linked_path - singly linked list
@@ -42,6 +43,7 @@ char **_arguments(char *str);
 void _puts(char *str);
 int _putchar(char c);
 char _getc(FILE *stream);
+void error_message(int p, char *s);
 
 /* malloc related fucntions */
 void free_pointer(char **ptr, int count);
