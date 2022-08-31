@@ -37,6 +37,8 @@ int _strlen(char *s);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *_strchr(char *s, char c);
 char _getc(FILE *stream);
-char *_strpbrk(char *s, char *accept);
+char *_strstr(char *haystack, char *needle);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
 
 #endif /* #define _SHELL_H_ */
