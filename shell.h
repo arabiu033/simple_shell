@@ -14,6 +14,19 @@
 
 #define SIGQUIT 3   /* Quit the process */
 
+/**
+ * struct linked_path - singly linked list
+ * @s: string to break into link list
+ * @next: points to the next node
+ *
+ * Description: links the directories in PATH
+ */
+typedef struct linked_path
+{
+	char *s;
+	struct linked_path *next;
+} lp;
+
 char *_strtok(char *str, const char *delim);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 char **_arguments(char *str);
