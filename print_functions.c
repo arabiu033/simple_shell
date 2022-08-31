@@ -50,11 +50,12 @@ char _getc(__attribute__((unused)) FILE *stream)
  * error_message - prints error message for invalid command
  * @p: process number
  */
-void error_message(int p, char *s)
+void error_message(int p, char *s, char *cmd)
 {
-	_puts("sh: ");
+	_puts(s);
+	_puts(": ");
 	print_number(p);
 	_puts(": ");
-	_puts(s);
+	_puts(cmd);
 	_puts("not found\n");
 }

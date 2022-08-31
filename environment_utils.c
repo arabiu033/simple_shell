@@ -88,7 +88,7 @@ lp *_path_directories_list(void)
  * Description: Overwrites the variable if overwrit is non-zero
  * Return: 0 on success, -1 on failure
  */
-int _setenv(const char *name, const char *value, int overwrite)
+int _setenv(char *name, char *value, int overwrite)
 {
 	int i;
 	char *var_name;
@@ -98,7 +98,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 		var_name = _strtok(environ[i], "=");
 		if (!(_strcomp(var_name, name)))
 		{
-			if (overwritten)
+			if (overwrite)
 				;
 			else
 				return (0);

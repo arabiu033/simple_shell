@@ -45,7 +45,7 @@ char **_arguments(char *str);
 void _puts(char *str);
 int _putchar(char c);
 char _getc(FILE *stream);
-void error_message(int p, char *s);
+void error_message(int p, char *s, char *cmd);
 
 /* malloc related fucntions */
 void free_pointer(char **ptr, int count);
@@ -56,6 +56,7 @@ void _printenv(void);
 char *_getenv(const char *name);
 void _path_directories(void);
 lp *_path_directories_list(void);
+int _setenv(char *name, char *value, int overwrite);
 
 /* path related functions lp */
 lp *linked_list(lp **head, const char *str);
