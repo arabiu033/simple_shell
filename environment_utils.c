@@ -78,3 +78,27 @@ lp *_path_directories_list(void)
 
 	return (head);
 }
+
+/**
+ * _setenv - adds variable to the environment
+ * @name: variable name
+ * @value: variable value
+ * @overwrite: Overwrite condition if name already exist
+ *
+ * Description: Overwrites the variable if overwrit is non-zero
+ * Return: 0 on success, -1 on failure
+ */
+int _setenv(const char *name, const char *value, int overwrite)
+{
+	int i;
+	char *var_name;
+
+	for (i = 0; environ[i]; i++)
+	{
+		var_name = _strtok(environ[i], "=");
+		if (!(_strcomp(var_name, name)))
+		{
+			if (overwritten)
+				;
+			else
+				return (0);
