@@ -1,32 +1,32 @@
-#include <stdio.h>
+#include "shell.h"
 
-lp linked_list(char *str)
+/**
+ * linked_list - adds a node at the end of a linked list
+ * @head: head pointer
+ * @str: string
+ *
+ * Return: address to the new element
+ */
+lp *linked_list(lp **head, const char *str)
 {
+	lp *new;
 
-	lp *head, *new, *last;
-	int n = 1;
-	char *buf;
+	new = malloc(sizeof(lp));
+	if (new == NULL)
+		return (NULL);
+	new->s = strdup(str);
+	new->next = NULL;
 
-	buf = strtok(str, ":");
-	while (buf)
+	if (*head == NULL)
+		*head = new;
+	else
 	{
-		new = malloc(sizeof(lp));
-		new->s = strdup(buf);
-		new->next = NULL;
+		lp *last = *head;
 
-		if (n)
-		{
-			head = new;
-			last = head;
-			n = 0;
-		}
-		else
-		{
-			last->next = new;
-			last = new;
-		}
-		buf = strtok(NULL, ":");
+		while (last->next != NULL)
+			last = last->next;
+		last->next = new;
 	}
 
-	return (head);
+	return (new);
 }
