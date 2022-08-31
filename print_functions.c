@@ -53,7 +53,7 @@ char _getc(__attribute__((unused)) FILE *stream)
 void error_message(int p, char *s)
 {
 	_puts("sh: ");
-	write(1, &p, 4);
+	print_number(p);
 	_puts(": ");
 	_puts(s);
 	_puts("not found\n");
