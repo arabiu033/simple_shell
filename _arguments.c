@@ -8,17 +8,17 @@
 char **_arguments(char *str)
 {
 	char **arrayOfArgs, **dummyPtr = NULL, *holder;
-	int numOfArgs = 2, count = 0, i = 0, newSize;
+	int numOfArgs = 1, count = 0, i = 0, newSize;
 
 	arrayOfArgs = malloc(sizeof(char *) * numOfArgs);
-	arrayOfArgs[1] = NULL;
+
 	if (!arrayOfArgs)
 		return (NULL);
 
 	holder = _strtok(str, " ");
 	while (holder)
 	{
-		arrayOfArgs[count] = malloc(sizeof(char) * strlen(holder));
+		arrayOfArgs[count] = malloc(sizeof(char) * (strlen(holder) + 1));
 		if (!arrayOfArgs[count])
 		{
 			free_pointer(arrayOfArgs, count);
@@ -27,15 +27,16 @@ char **_arguments(char *str)
 
 		for (i = 0; holder[i]; i++)
 			arrayOfArgs[count][i] = holder[i];
+		arrayOfArgs[count][i] = '\0';
 
 		holder = _strtok(NULL, " ");
 
 		if (holder)
 		{
 			newSize = ++numOfArgs;
-			dummyPtr = (char **)
-				_realloc(arrayOfArgs, numOfArgs,
-					 (newSize) * sizeof(*arrayOfArgs));
+		        dummyPtr = (char **)
+				realloc(arrayOfArgs,
+					(newSize) * sizeof(char *));
 		}
 
 		if (holder && !dummyPtr)
@@ -48,6 +49,7 @@ char **_arguments(char *str)
 		count++;
 
 	}
+	arrayOfArgs[count] = '\0';
 	return (arrayOfArgs);
 }
 
