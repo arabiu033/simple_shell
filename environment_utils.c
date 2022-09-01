@@ -90,15 +90,52 @@ lp *_path_directories_list(void)
  */
 int _setenv(char *name, char *value, int overwrite)
 {
-	int i;
-	char *var_name;
+	int i, j, x, old_len, new_len, len, a;
+	char **environ_cpy;
 
 	for (i = 0; environ[i]; i++)
 	{
-		var_name = _strtok(environ[i], "=");
-		if (!(_strcomp(var_name, name)))
+		if (_strstr(environ[i], name))
 		{
 			if (overwrite)
-				;
-			else
-				return (0);
+			{
+				environ_cpy = _malloc2D(environ);
+				j = _strlen(name) + 1;
+				new_len = j + _strlen(value);
+				old_len = _strlen(environ_cpy[i]) + 1;
+				environ_cpy[i] = _realloc(environ_cpy[i], old_len * sizeof(char),
+					 (new_len + 1) * sizeof(char));
+				for (x = 0; value[x]; x++)
+				{
+					environ_cpy[i][j] = value[x];
+					j++;
+				}
+				environ_cpy[i][j] = '\0';
+				environ = environ_cpy;
+			}
+			return (0);
+		}
+	}
+	environ_cpy = _malloc2D(environ);
+	for (old_len = 1; environ[old_len]; old_len++)
+		;
+	new_len = old_len + 1;
+	environ_cpy = _realloc(environ_cpy, old_len * sizeof(char *), (new_len) * sizeof(char *));
+	if (environ_cpy == NULL)
+		return (-1);
+	environ_cpy[old_len] = NULL;
+	len = _strlen(name) + _strlen(value) + 2;
+	environ_cpy[old_len - 1] = malloc(len * sizeof(char));
+	if (environ_cpy[old_len - 1] == NULL)
+		return (-1);
+	for (a = 0; name[a]; a++)
+		environ_cpy[old_len - 1][a] = name[a];
+	environ_cpy[old_len - 1][a] = '=';
+	a++;
+	for (i = 0; value[i]; i++, a++)
+		environ_cpy[old_len - 1][a] = value[i];
+	environ_cpy[old_len - 1][a] = '\0';
+	environ = environ_cpy;
+
+	return (0);
+}

@@ -50,6 +50,7 @@ void error_message(int p, char *s, char *cmd);
 /* malloc related fucntions */
 void free_pointer(char **ptr, int count);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char **_malloc2D(char **array_2D);
 
 /* environment related functions */
 void _printenv(void);

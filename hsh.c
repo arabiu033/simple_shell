@@ -53,7 +53,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 			if (execve(args[0], args, NULL) == -1)
 			{
 				process_num++;
-				error_message(getppid() - getpid(), argv[0], args[0]);
+				error_message(getpid() - getppid(), argv[0], args[0]);
 				kill(getpid(), SIGQUIT);
 			}
 		}
