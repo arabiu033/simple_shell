@@ -1,74 +1,101 @@
 #include "shell.h"
 
+int word_len(char *str);
+int count_words(char *str);
+char **strtow(char *str);
+
 /**
- * _arguments - allocates memory for arguments
- * @str: the argument string
- * Return: pointer to argument string
+ * word_len - Locates the index marking the end of the
+ *            first word contained within a string.
+ * @str: The string to be searched.
+ *
+ * Return: The index marking the end of the initial word pointed to by str.
  */
-char **_arguments(char *str)
+int word_len(char *str)
 {
-	char **arrayOfArgs, **dummyPtr = NULL, *holder;
-	int numOfArgs = 1, count = 0, i = 0, newSize;
+	int index = 0, len = 0;
 
-	arrayOfArgs = malloc(sizeof(char *) * numOfArgs);
-
-	if (!arrayOfArgs)
-		return (NULL);
-
-	holder = _strtok(str, " ");
-	while (holder)
+	while (*(str + index) && *(str + index) != ' ')
 	{
-		arrayOfArgs[count] = malloc(sizeof(char) * (strlen(holder) + 1));
-		if (!arrayOfArgs[count])
-		{
-			free_pointer(arrayOfArgs, count);
-			return (NULL);
-		}
-
-		for (i = 0; holder[i]; i++)
-			arrayOfArgs[count][i] = holder[i];
-		arrayOfArgs[count][i] = '\0';
-
-		holder = _strtok(NULL, " ");
-
-		if (holder)
-		{
-			newSize = ++numOfArgs;
-		        dummyPtr = (char **)
-				realloc(arrayOfArgs,
-					(newSize) * sizeof(char *));
-		}
-
-		if (holder && !dummyPtr)
-		{
-			free_pointer(arrayOfArgs, count);
-			return (NULL);
-		}
-		if (dummyPtr)
-			arrayOfArgs = dummyPtr;
-		count++;
-
+		len++;
+		index++;
 	}
-	arrayOfArgs[count] = '\0';
-	return (arrayOfArgs);
+
+	return (len);
 }
 
 /**
- * free_pointer - free the malloc space
- * @ptr: pointer to free
- * @count: size of pointer
- * Return: void - nothing
+ * count_words - Counts the number of words contained within a string.
+ * @str: The string to be searched.
+ *
+ * Return: The number of words contained within str.
  */
-void free_pointer(char **ptr, int count)
+int count_words(char *str)
 {
-	int i;
+	int index = 0, words = 0, len = 0;
 
-	if (!count)
+	for (index = 0; *(str + index); index++)
+		len++;
+
+	for (index = 0; index < len; index++)
 	{
-		free(ptr);
-		return;
+		if (*(str + index) != ' ')
+		{
+			words++;
+			index += word_len(str + index);
+		}
 	}
-	for (i = 0; i <= count; i++)
-		free(ptr[i]);
-	free(ptr);
+
+	return (words);
+}
+
+/**
+ * strtow - Splits a string into words.
+ * @str: The string to be split.
+ *
+ * Return: If str = NULL, str = "", or the function fails - NULL.
+ *         Otherwise - a pointer to an array of strings (words).
+ */
+char **_arguments(char *str)
+{
+	char **strings;
+	int index = 0, words, w, letters, l;
+
+	if (str == NULL || str[0] == '\0')
+		return (NULL);
+
+	words = count_words(str);
+	if (words == 0)
+		return (NULL);
+
+	strings = malloc(sizeof(char *) * (words + 1));
+	if (strings == NULL)
+		return (NULL);
+
+	for (w = 0; w < words; w++)
+	{
+		while (str[index] == ' ')
+			index++;
+
+		letters = word_len(str + index);
+
+		strings[w] = malloc(sizeof(char) * (letters + 1));
+
+		if (strings[w] == NULL)
+		{
+			for (; w >= 0; w--)
+				free(strings[w]);
+
+			free(strings);
+			return (NULL);
+		}
+
+		for (l = 0; l < letters; l++)
+			strings[w][l] = str[index++];
+
+		strings[w][l] = '\0';
+	}
+	strings[w] = NULL;
+
+	return (strings);
 }
