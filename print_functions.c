@@ -57,5 +57,5 @@ void error_message(int p, char *s, char *cmd)
 	print_number(p);
 	_puts(": ");
 	_puts(cmd);
-	_puts(" not found");
+	_puts(" not found\n");
 }

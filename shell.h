@@ -38,7 +38,7 @@ char *_strcpy(char *dest, char *src);
 int _strlen(char *s);
 int _strcomp(char *s1, char *s2);
 void print_number(int n);
-
+char **strtow(char *str);
 /* write and read functions created */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 char **_arguments(char *str);
