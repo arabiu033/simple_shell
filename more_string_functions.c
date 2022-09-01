@@ -37,7 +37,7 @@ void print_number(int n)
  * @s1: string 1
  * @s2: string 2
  *
- * Return: 0 on success
+ * Return: 1 on success
  */
 int _strcomp(char *s1, char *s2)
 {
@@ -51,7 +51,38 @@ int _strcomp(char *s1, char *s2)
 				j++;
 		}
 		if (i == j)
-			return (0);
+			return (1);
 	}
+	return (0);
+}
+
+/**
+ * _str-upper - Checks if a string is in uppercase
+ * @str: The string
+ *
+ * Return: 1 if they are the same
+ */
+int _str_upper(char *str)
+{
+	int i;
+
+	for (i = 0; str[i]; i++)
+	{
+		if (_isupper(str[i]) == 0)
+		    return (0);
+	}
+
 	return (1);
+}
+
+/**
+ * _isupper - Checks for uppercase character
+ * @c: Character
+ * Return: 1 if uppercase, otherwise 0.
+ */
+int _isupper(int c)
+{
+	if (c >= 65 && c <= 90)
+		return (1);
+	return (0);
 }

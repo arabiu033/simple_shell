@@ -6,7 +6,7 @@
  */
 void handle_sigint(__attribute__((unused)) int signum)
 {
-	;
+	printf("\n");
 }
 
 /**
@@ -18,7 +18,7 @@ void handle_sigint(__attribute__((unused)) int signum)
  * with their full path, without any argument.
  * Return: Always 0
  */
-int main(__attribute__((unused)) int argc, char **argv)
+int main(__attribute__((unused)) int argc, char **argv, char **env)
 {
 	char **args, *command = NULL;
 	size_t size = 0;
@@ -32,7 +32,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 	{
 		command = NULL;
 		if (atty)
-			_puts("(<>) ");
+			_puts("($) ");
 		p = _getline(&command, &size, stdin);
 		if (p == -1)
 			continue;
@@ -50,7 +50,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 			return (-1);
 		if (fork_process == 0)
 		{
-			if (execve(args[0], args, NULL) == -1)
+			if (execve(args[0], args, env) == -1)
 			{
 				process_num++;
 				error_message(getpid() - getppid(), argv[0],

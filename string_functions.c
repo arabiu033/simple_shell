@@ -6,7 +6,6 @@
  *
  * Return: length of string s
  */
-
 int _strlen(char *s)
 {
 	int x = 0;
@@ -24,7 +23,6 @@ int _strlen(char *s)
  *
  * Return: a pointer to the first occurence of the character
  */
-
 char *_strchr(char *s, char c)
 {
 	int i;
@@ -45,7 +43,6 @@ char *_strchr(char *s, char c)
  * @haystack: string *
  * Return: a pointer to needle in haystack
  */
-
 char *_strstr(char *haystack, char *needle)
 {
 	unsigned int i = 0, j = 0;
@@ -78,7 +75,6 @@ char *_strstr(char *haystack, char *needle)
  *
  * Return: returns poiner to @dest
  */
-
 char *_strcat(char *dest, char *src)
 {
 
@@ -100,7 +96,6 @@ char *_strcat(char *dest, char *src)
  *
  * Return: returns src
  */
-
 char *_strcpy(char *dest, char *src)
 {
 	int i;
