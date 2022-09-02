@@ -71,12 +71,20 @@ int _setenv(char *name, char *value)
 {
 	int i, j, x, old_len, new_len, len, a;
 	char **environ_cpy;
+	char *str;
 
 	if (_str_upper(name) == 0)
 		return (-1);
+	if (name == NULL)
+	{
+		perror("name is NULL");
+		return (-1);
+	}
+	str = malloc(sizeof(char) * (_strlen((char *) name) + 1));
+	str = _strcat(_strcpy(str, (char *) name), "=");
 	for (i = 0; environ[i]; i++)
 	{
-		if (_strstr(environ[i], name))
+		if (_strstr(environ[i], str))
 		{
 			environ_cpy = _malloc2D(environ);
 			j = _strlen(name) + 1;
@@ -129,12 +137,15 @@ int _unsetenv(char *name)
 {
 	int i, rmv, n, j = 0, k = 0, x, len;
 	char **new_environ;
+	char *str;
 
 	if (name == NULL)
 		return (-1);
+	str = malloc(sizeof(char) * (_strlen((char *) name) + 1));
+	str = _strcat(_strcpy(str, (char *) name), "=");
 	for (rmv = 0; environ[rmv]; rmv++)
 	{
-		if (_strstr(environ[rmv], name))
+		if (_strstr(environ[rmv], str))
 			break;
 	}
 	if (environ[rmv] == NULL)

@@ -78,3 +78,19 @@ char **_malloc2D(char **array_2D)
 
 	return (holder);
 }
+
+/**
+ * free_array2D - frees a 2D array
+ * @array_2D: 2D array to free
+ *
+ * Return: void
+ */
+void free_array2D(char **array_2D)
+{
+	int i;
+
+	for (i = 0; array_2D[i]; i++)
+		free(array_2D[i]);
+	free(array_2D[i]);
+	free(array_2D);
+}
