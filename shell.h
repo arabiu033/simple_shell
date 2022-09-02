@@ -1,7 +1,7 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
-/* Standard library files */
+/* Header files */
 #include <stdio.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -12,6 +12,8 @@
 #include <fcntl.h>
 #include <stddef.h>
 #include <signal.h>
+#include <ctype.h>
+#include <errno.h>
 
 #define SIGQUIT 3   /* Quit the process */
 extern char **environ;
@@ -38,6 +40,9 @@ char *_strcpy(char *dest, char *src);
 int _strlen(char *s);
 int _strcomp(char *s1, char *s2);
 void print_number(int n);
+char **strtow(char *str);
+int _str_upper(char *str);
+int _isupper(int c);
 
 /* write and read functions created */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
@@ -46,17 +51,20 @@ void _puts(char *str);
 int _putchar(char c);
 char _getc(FILE *stream);
 void error_message(int p, char *s, char *cmd);
+int print_line(int fd, char **cmd_ptr);
 
 /* malloc related fucntions */
 void free_pointer(char **ptr, int count);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char **_malloc2D(char **array_2D);
+void free_array2D(char **);
 
 /* environment related functions */
-void _printenv(void);
 char *_getenv(const char *name);
 void _path_directories(void);
 lp *_path_directories_list(void);
-int _setenv(char *name, char *value, int overwrite);
+int _setenv(char *name, char *value);
+int _unsetenv(char *name);
 
 /* path related functions lp */
 lp *linked_list(lp **head, const char *str);

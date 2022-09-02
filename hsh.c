@@ -6,13 +6,14 @@
  */
 void handle_sigint(__attribute__((unused)) int signum)
 {
-	;
+	printf("\n");
 }
 
 /**
  * main - contains the main function of the program
  * @argc: Arguments passed into the CLI
  * @argv: Pointer to arguments string
+ * @env: Contains the environment variable
  *
  * Description:  a super simple shell that can run commands
  * with their full path, without any argument.
@@ -20,20 +21,18 @@ void handle_sigint(__attribute__((unused)) int signum)
  */
 int main(__attribute__((unused)) int argc, char **argv, char **env)
 {
-	char **args, *command = NULL;
-	size_t size = 0;
-	int x = 1, i, atty = isatty(0), process_num = 0;
+	char **args, *cmd;
+	/* size_t size = 0; */
+	int x = 1, atty = isatty(0), process_num = 0;
 	ssize_t p = -1;
 	pid_t fork_process;
 
-	signal(SIGINT, handle_sigint);
 	signal(SIGTSTP, SIG_IGN);
 	while (x)
 	{
-		command = NULL;
 		if (atty)
-			_puts("(<>) ");
-		p = _getline(&command, &size, stdin);
+			_puts("($) ");
+		p = print_line(1, &cmd);
 		if (p == -1)
 			continue;
 		if (!p)
@@ -43,8 +42,8 @@ int main(__attribute__((unused)) int argc, char **argv, char **env)
 			return (0);
 		}
 
-		args = _arguments(command);
-
+		args = _arguments(cmd);
+		free(cmd);
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
@@ -53,17 +52,12 @@ int main(__attribute__((unused)) int argc, char **argv, char **env)
 			if (execve(args[0], args, env) == -1)
 			{
 				process_num++;
-				error_message(getpid() - getppid(), argv[0],
-					      args[0]);
+				error_message(getpid() - getppid(), argv[0], args[0]);
 				kill(getpid(), SIGQUIT);
 			}
 		}
 		wait(NULL);
-		/* Create a separate function to free pointer */
-		for (i = 0; args[i]; i++)
-			free(args[i]);
-		free(args[i]);
-		free(args);
+		free_array2D(args);
 	}
 	return (0);
 }
