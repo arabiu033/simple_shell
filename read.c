@@ -1,46 +1,46 @@
 #include "shell.h"
 
-int print_line(int fd, char **cmd_ptr)
+ssize_t print_line(int fd, char **cmd_ptr)
 {
 	char c;
-	int n, len, new_size, old_size, i = 0;
+	ssize_t n, len = 0, new_size, old_size;
 	static char *commands;
 
 	n = read(fd, &c, 1);
+	if (!c)
+		return (0);
 	if (c != '\n')
 	{
-		len = 1;
-		commands = malloc(sizeof(char) * 1024);
-		old_size = 1024;
-		commands[i++] = c;
+		commands = malloc(sizeof(char) * 30);
+		old_size = new_size = 30;
+		commands[len] = c;
+		len++;
 		while (n == 1)
 		{
-			if (len == 1024)
+			if (len == 30)
 			{
-				new_size = old_size + 1024;
+				new_size = old_size + 30;
 				commands = _realloc(commands, old_size * sizeof(char),
 						   new_size * sizeof(char));
-				new_size = old_size;
+				if (commands == NULL)
+				old_size = new_size;
 			}
-			n = read(1, &c, 1);
+			n = read(fd, &c, 1);
+			if (!c)
+				return (0);
 			if (c == '\n')
 				break;
-			else if (c == EOF)
-				return (0);
+			commands[len] = c;
 			len++;
-			commands[i++] = c;
 		}
 	}
-	else if (c == EOF)
-		return (0);
-	else if (c == '\n')
+	else
 		return (-1);
+	old_size = new_size;
 	new_size = len + 1;
-	commands = _realloc(commands, len * sizeof(char),
+	commands = _realloc(commands, old_size * sizeof(char),
 			   new_size * sizeof(char));
 	commands[len] = '\0';
-
 	*cmd_ptr = commands;
-
 	return (len);
 }
