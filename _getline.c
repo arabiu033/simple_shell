@@ -7,38 +7,29 @@
  * @stream: where to capture the string
  * Return: n - size of the string
  */
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
+ssize_t _getline(char **lineptr, __attribute__((unused)) size_t *n, __attribute__((unused)) FILE *stream)
 {
-	ssize_t count = 0;
-	char c;
-	size_t newSize;
+	static char *buffer;
+	static char* val = NULL;
+	ssize_t size;
 
-	if (!(*lineptr) || !(*n))
+	if (!val)
 	{
-		*lineptr = malloc(sizeof(char) * 100);
-		*n = 100;
+		buffer = malloc(sizeof(char) * 1024);
+
+		size = read(0, buffer, 1024);
+		*lineptr = strtok(buffer, "\n");
+		val  = strtok(NULL, "\n");
+	}
+	else
+	{
+		*lineptr = val;
+		val  = strtok(NULL, "\n");
+
+		if (!val)
+			free(buffer);
+
 	}
 
-	do {
-		c = getc(stream);
-
-		if (!count && c == ' ')
-			continue;
-		else if (!count && c == '\n')
-			return (-1);
-		else if (c != EOF)
-			((*lineptr)[count++]) = c;
-
-		if (*n - count < 5)
-		{
-			newSize = *n += 32;
-			*lineptr = realloc(*lineptr, newSize);
-		}
-
-	} while (c != EOF  && c != '\n');
-
-	if (((*lineptr)[strlen(*lineptr) - 1]) == '\n')
-		((*lineptr)[strlen(*lineptr) - 1]) = '\0';
-	*n = (size_t) count;
-	return (count);
+	return(size);
 }

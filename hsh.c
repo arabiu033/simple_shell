@@ -44,7 +44,7 @@ int main(__attribute__((unused)) int argc, char **argv, char **env)
 		}
 
 		args = _arguments(command);
-		free(command);
+
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
