@@ -80,7 +80,7 @@ int _setenv(char *name, char *value)
 		perror("name is NULL");
 		return (-1);
 	}
-	str = malloc(sizeof(char) * (_strlen((char *) name) + 1));
+	str = malloc(sizeof(char) * (_strlen((char *) name) + 2));
 	str = _strcat(_strcpy(str, (char *) name), "=");
 	for (i = 0; environ[i]; i++)
 	{

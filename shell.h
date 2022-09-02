@@ -52,6 +52,7 @@ int _putchar(char c);
 char _getc(FILE *stream);
 void error_message(int p, char *s, char *cmd);
 ssize_t print_line(int fd, char **cmd_ptr);
+void invalid_file(char *s1, char *s2);
 
 /* malloc related fucntions */
 void free_pointer(char **ptr, int count);

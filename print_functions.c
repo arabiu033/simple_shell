@@ -49,6 +49,8 @@ char _getc(__attribute__((unused)) FILE *stream)
 /**
  * error_message - prints error message for invalid command
  * @p: process number
+ * @s: the shell name
+ * @s: t\The command passed
  */
 void error_message(int p, char *s, char *cmd)
 {
@@ -58,4 +60,20 @@ void error_message(int p, char *s, char *cmd)
 	_puts(": ");
 	_puts(cmd);
 	_puts(" not found\n");
+}
+
+/**
+ * invalid_file - printts error message if file does not exist
+ * @s1: the shell name
+ * @s2: the shell first argument (filename)
+ */
+void invalid_file(char *s1, char *s2)
+{
+	_puts(s1);
+	_puts(": ");
+	_putchar('0');
+	_puts(": ");
+	_puts("Cant't open ");
+	_puts(s2);
+	_putchar('\n');
 }
