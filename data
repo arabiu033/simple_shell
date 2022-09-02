@@ -1,3 +1,2 @@
 /bin/ls
-/bin/ls /root
-/bin/ls /usr
+/bin/pwd

@@ -32,17 +32,20 @@ int main(__attribute__((unused)) int argc, char **argv, char **env)
 	{
 		if (atty)
 			_puts("($) ");
-		p = print_line(1, &cmd);
+
+		p = print_line(0, &cmd);
+
 		if (p == -1)
 			continue;
 		if (!p)
 		{
 			if (atty)
-				_puts("\n");
+				_putchar('\n');
 			return (0);
 		}
 
-		args = _arguments(cmd);
+		args = strtow(cmd);
+
 		free(cmd);
 		fork_process = fork();
 		if (fork_process == -1)

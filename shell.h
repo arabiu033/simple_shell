@@ -51,13 +51,13 @@ void _puts(char *str);
 int _putchar(char c);
 char _getc(FILE *stream);
 void error_message(int p, char *s, char *cmd);
-int print_line(int fd, char **cmd_ptr);
+ssize_t print_line(int fd, char **cmd_ptr);
 
 /* malloc related fucntions */
 void free_pointer(char **ptr, int count);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char **_malloc2D(char **array_2D);
-void free_array2D(char **);
+void free_array2D(char **array_2D);
 
 /* environment related functions */
 char *_getenv(const char *name);
