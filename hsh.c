@@ -54,11 +54,12 @@ int main(int argc, char **argv, __attribute__((unused)) char **envp)
 			return (0);
 		}
 		args = strtow(cmd);
-		if (_strcomp(args[0], "setenv") && !(args[3]))
-		{
-			_setenv(args[1], args[2]);
+
+		if (check_token(args) == 1)
 			continue;
-		}
+		else if (check_token(args) == 0)
+			return (0);
+
 		free(cmd);
 		fork_process = fork();
 		if (fork_process == -1)

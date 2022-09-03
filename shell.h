@@ -43,6 +43,7 @@ void print_number(int n);
 char **strtow(char *str);
 int _str_upper(char *str);
 int _isupper(int c);
+int check_token(char **str);
 
 /* write and read functions created */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
