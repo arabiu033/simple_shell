@@ -1,6 +1,6 @@
 #include "shell.h"
 
-ssize_t print_line(int fd, char **cmd_ptr)
+ssize_t _getline(int fd, char **cmd_ptr)
 {
 	char c;
 	ssize_t n, len = 0, new_size, old_size;

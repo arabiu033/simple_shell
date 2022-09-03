@@ -7,28 +7,27 @@
 void handle_sigint(int signum)
 {
 	(void) signum;
-	_puts("\n");
+	_puts("\n($) ");
 }
 
 /**
  * main - contains the main function of the program
  * @argc: Arguments passed into the CLI
  * @argv: Pointer to arguments string
- * @env: Contains the environment variable
  *
- * Description:  a super simple shell that can run commands
- * with their full path, without any argument.
+ * Description: A simple shell
  * Return: Always 0
  */
-int main(int argc, char **argv, __attribute__((unused)) char **envp)
+int main(int argc, char **argv)
 {
 	char **args, *cmd;
-	/* size_t size = 0; */
 	int x = 1, process_num = 0, fd = 0;
 	ssize_t p = -1;
 	pid_t fork_process;
 
 	signal(SIGTSTP, SIG_IGN);
+	signal(SIGINT, handle_sigint);
+
 	if (argc >= 2)
 	{
 		fd = open(argv[1], O_RDONLY);
@@ -42,7 +41,7 @@ int main(int argc, char **argv, __attribute__((unused)) char **envp)
 	{
 		if (isatty(fd))
 			_puts("($) ");
-		p = print_line(fd, &cmd);
+		p = _getline(fd, &cmd);
 		if (p == -1)
 			continue;
 		else if (!p)
@@ -54,6 +53,11 @@ int main(int argc, char **argv, __attribute__((unused)) char **envp)
 			return (0);
 		}
 		args = strtow(cmd);
+		if (_strcomp(args[0], "unsetenv") && !(args[2]))
+		{
+			_unsetenv(args[1]);
+			continue;
+		}
 		free(cmd);
 		fork_process = fork();
 		if (fork_process == -1)
