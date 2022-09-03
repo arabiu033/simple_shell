@@ -71,11 +71,13 @@ void invalid_file(char *s1, char *s2)
  */
 int check_token(char **str)
 {
-	if (_strcomp(str[0], "setenv") && !(str[3]))
+	if (!_strcmp(str[0], "setenv"))
 		_setenv(str[1], str[2]);
-	else if (_strcomp(str[0], "unsetenv") && !str[2])
+
+	else if (!_strcmp(str[0], "unsetenv") && !str[2])
 		_unsetenv(str[1]);
-	else if (_strcomp(str[0], "exit"))
+
+	else if (!_strcmp(str[0], "exit"))
 		return (0);
 	else
 		return (-1);

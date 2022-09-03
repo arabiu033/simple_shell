@@ -19,11 +19,11 @@ void handle_sigint(__attribute__((unused)) int signum)
  */
 int main(int argc, char **argv)
 {
-	char **args, *cmd, *s;
+	char **args, *cmd;
 	int x = 1, process_num = 0, fd = 0;
 	ssize_t p;
 	pid_t fork_process;
-	struct stat st;
+	/* struct stat st; */
 
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, handle_sigint);
@@ -56,15 +56,13 @@ int main(int argc, char **argv)
 		}
 		args = strtow(cmd);
 
-		/* e = check_token(args);
-		print_number(e);
-		if (e)
+		if (check_token(args)  == 1)
 		{
 			free_array2D(args);
 			continue;
 		}
-		*/
-		s = _which(args[0]);
+
+		/* s = _which(args[0]);
 		if (!stat(s, &st))
 			args[0] = s;
 		else
@@ -72,6 +70,7 @@ int main(int argc, char **argv)
 			error_message(x, argv[0], args[0]);
 			continue;
 		}
+		*/
 		free(cmd);
 
 		fork_process = fork();
