@@ -4,9 +4,8 @@
  * handle_sigint - signal handling for SIGINT
  * @signum: SIGINT
  */
-void handle_sigint(int signum)
+void handle_sigint(__attribute__((unused)) int signum)
 {
-	(void) signum;
 	_puts("\n($) ");
 }
 
@@ -22,7 +21,7 @@ int main(int argc, char **argv)
 {
 	char **args, *cmd;
 	int x = 1, process_num = 0, fd = 0;
-	ssize_t p = -1;
+	ssize_t p;
 	pid_t fork_process;
 
 	signal(SIGTSTP, SIG_IGN);
@@ -42,7 +41,7 @@ int main(int argc, char **argv)
 		if (isatty(fd))
 			_puts("($) ");
 		p = _getline(fd, &cmd);
-		if (p == -1)
+		if (p == 1)
 			continue;
 		else if (!p)
 		{
@@ -53,12 +52,14 @@ int main(int argc, char **argv)
 			return (0);
 		}
 		args = strtow(cmd);
-		if (_strcomp(args[0], "unsetenv") && !(args[2]))
-		{
-			_unsetenv(args[1]);
-			continue;
-		}
 		free(cmd);
+		/**
+		 * if (check_token(args) == 1)
+		 * {
+		 * free_array2D(args);
+		 * continue;
+		 * }
+		 */
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
