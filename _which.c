@@ -46,7 +46,7 @@ char *_pathFinder(lp *home, char *str)
 
 		if (!stat(path, &st))
 		{
-			free_list(home);
+			/* free_list(home); */
 			return (path);
 		}
 
@@ -54,6 +54,7 @@ char *_pathFinder(lp *home, char *str)
 		free(path);
 	}
 
-	free_list(home);
+
+	/* free_list(home); */
 	return (str);
 }

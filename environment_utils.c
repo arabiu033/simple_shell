@@ -44,8 +44,11 @@ void _path_directories(void)
  */
 lp *_path_directories_list(void)
 {
-	lp *head = NULL;
+	static lp *head = NULL;
 	char *path, *dir;
+
+	if (head)
+		return (head);
 
 	path = _getenv("PATH");
 	dir = _strtok(path, ":");

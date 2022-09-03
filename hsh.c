@@ -21,11 +21,12 @@ void handle_sigint(__attribute__((unused)) int signum)
  */
 int main(__attribute__((unused)) int argc, char **argv, char **env)
 {
-	char **args, *cmd;
+	char **args, *cmd, *s;
 	/* size_t size = 0; */
 	int x = 1, atty = isatty(0), process_num = 0;
 	ssize_t p = -1;
 	pid_t fork_process;
+	struct stat st;
 
 	signal(SIGTSTP, SIG_IGN);
 	while (x)
@@ -45,7 +46,14 @@ int main(__attribute__((unused)) int argc, char **argv, char **env)
 		}
 
 		args = strtow(cmd);
-
+		s = _which(args[0]);
+		if (!stat(s, &st))
+			args[0] = s;
+		else
+		{
+			error_message(getpid() - getppid(), argv[0], args[0]);
+			continue;
+		}
 		free(cmd);
 		fork_process = fork();
 		if (fork_process == -1)
