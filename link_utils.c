@@ -9,8 +9,9 @@
  */
 lp *linked_list(lp **head, const char *str)
 {
-	lp *new;
+	lp *new, *last;
 
+	printf("----");
 	new = malloc(sizeof(lp));
 	if (new == NULL)
 		return (NULL);
@@ -21,13 +22,14 @@ lp *linked_list(lp **head, const char *str)
 		*head = new;
 	else
 	{
-		lp *last = *head;
+		puts("----f");
+		last = *head;
 
 		while (last->next != NULL)
 			last = last->next;
 		last->next = new;
 	}
-
+	puts("yyyy");
 	return (new);
 }
 

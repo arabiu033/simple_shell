@@ -65,8 +65,11 @@ void _path_directories(void);
 lp *_path_directories_list(void);
 int _setenv(char *name, char *value);
 int _unsetenv(char *name);
+char *_which(char *str);
+char *_pathFinder(lp *name, char *str);
 
 /* path related functions lp */
 lp *linked_list(lp **head, const char *str);
+void free_list(lp *head);
 
 #endif /* #define _SHELL_H_ */

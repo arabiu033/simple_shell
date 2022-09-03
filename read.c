@@ -12,14 +12,14 @@ ssize_t print_line(int fd, char **cmd_ptr)
 	if (c != '\n')
 	{
 		commands = malloc(sizeof(char) * 30);
-		old_size = new_size = 30;
+		old_size = new_size = 1024;
 		commands[len] = c;
 		len++;
 		while (n == 1)
 		{
-			if (len == 30)
+			if (len == old_size)
 			{
-				new_size = old_size + 30;
+				new_size = old_size + 1024;
 				commands = _realloc(commands, old_size * sizeof(char),
 						   new_size * sizeof(char));
 				if (commands == NULL)
