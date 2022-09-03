@@ -11,9 +11,8 @@ char *_which(char *str)
 
 	if (*str == '/')
 		return (str);
-	puts("1235");
+
 	head = _path_directories_list();
-	printf("-----g");
 	return (_pathFinder(head, str));
 
 }
@@ -54,7 +53,7 @@ char *_pathFinder(lp *home, char *str)
 
 		if (!stat(s, &st))
 		{
-			*free(s);
+			free(s);
 			free_list(home);
 			return (path);
 		}

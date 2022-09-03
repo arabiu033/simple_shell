@@ -5,7 +5,7 @@ int main(void)
 	char *s;;
 
 	puts("--T--");
-	s = _which("ls");
+	s = _which("/ls");
 	printf("%s\n", s);
 
 	return (0);
