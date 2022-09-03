@@ -2,34 +2,50 @@
 
 /**
  * _getline - for reading input from stram and files
- * @lineptr: buffer to store the string captured
- * @n: size of the string captured
- * @stream: where to capture the string
+ * @cmd_ptr: buffer to store the string captured
+ * @fd: where to capture the string
  * Return: n - size of the string
  */
-ssize_t _getline(char **lineptr, __attribute__((unused)) size_t *n, __attribute__((unused)) FILE *stream)
+ssize_t _getline(int fd, char **cmd_ptr)
 {
-	static char *buffer;
-	static char* val = NULL;
-	ssize_t size;
+	char c;
+	ssize_t n, len = 0, new_size, old_size;
+	static char *commands;
 
-	if (!val)
+	n = read(fd, &c, 1);
+	if (!c)
+		return (0);
+	if (c != '\n')
 	{
-		buffer = malloc(sizeof(char) * 1024);
-
-		size = read(0, buffer, 1024);
-		*lineptr = strtok(buffer, "\n");
-		val  = strtok(NULL, "\n");
+		commands = malloc(sizeof(char) * 5);
+		old_size = new_size = 5;
+		commands[len] = c;
+		len++;
+		while (n == 1)
+		{
+			if (len == old_size)
+			{
+				new_size = old_size + 5;
+				commands = _realloc(commands, old_size * sizeof(char),
+						    new_size * sizeof(char));
+				old_size = new_size;
+			}
+			n = read(fd, &c, 1);
+			if (!c)
+				return (0);
+			if (c == '\n')
+				break;
+			commands[len] = c;
+			len++;
+		}
 	}
 	else
-	{
-		*lineptr = val;
-		val  = strtok(NULL, "\n");
-
-		if (!val)
-			free(buffer);
-
-	}
-
-	return(size);
+		return (1);
+	old_size = new_size;
+	new_size = len + 1;
+	commands = _realloc(commands, old_size * sizeof(char),
+			   new_size * sizeof(char));
+	commands[len] = '\0';
+	*cmd_ptr = commands;
+	return (len);
 }

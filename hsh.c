@@ -6,46 +6,55 @@
  */
 void handle_sigint(__attribute__((unused)) int signum)
 {
-	printf("\n");
+	_puts("\n($) ");
 }
 
 /**
  * main - contains the main function of the program
  * @argc: Arguments passed into the CLI
  * @argv: Pointer to arguments string
- * @env: Contains the environment variable
  *
- * Description:  a super simple shell that can run commands
- * with their full path, without any argument.
+ * Description: A simple shell
  * Return: Always 0
  */
-int main(__attribute__((unused)) int argc, char **argv, char **env)
+int main(int argc, char **argv)
 {
 	char **args, *cmd, *s;
-	/* size_t size = 0; */
-	int x = 1, atty = isatty(0), process_num = 0;
-	ssize_t p = -1;
+	int x = 1, process_num = 0, fd = 0;
+	ssize_t p;
 	pid_t fork_process;
 	struct stat st;
 
 	signal(SIGTSTP, SIG_IGN);
+	signal(SIGINT, handle_sigint);
+
+	if (argc >= 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		if (fd == -1)
+		{
+			invalid_file(argv[0], argv[1]);
+			return (127);
+		}
+	}
 	while (x)
 	{
-		if (atty)
+		if (isatty(fd))
 			_puts("($) ");
 
-		p = print_line(0, &cmd);
-
-		if (p == -1)
+		p = _getline(fd, &cmd);
+		if (p == 1)
 			continue;
-		if (!p)
+		else if (!p)
 		{
-			if (atty)
+			if (isatty(fd))
 				_putchar('\n');
+			if (fd)
+				close(fd);
 			return (0);
 		}
-
 		args = strtow(cmd);
+
 		s = _which(args[0]);
 		if (!stat(s, &st))
 			args[0] = s;
@@ -55,12 +64,19 @@ int main(__attribute__((unused)) int argc, char **argv, char **env)
 			continue;
 		}
 		free(cmd);
+		/**
+		 * if (check_token(args) == 1)
+		 * {
+		 * free_array2D(args);
+		 * continue;
+		 * }
+		 */
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
-		if (fork_process == 0)
+		else if (fork_process == 0)
 		{
-			if (execve(args[0], args, env) == -1)
+			if (execve(args[0], args, environ) == -1)
 			{
 				process_num++;
 				error_message(getpid() - getppid(), argv[0], args[0]);

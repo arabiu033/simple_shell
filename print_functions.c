@@ -32,23 +32,10 @@ int _putchar(char c)
 }
 
 /**
- * _getc - Reads a character from file stream
- * @stream: file stream to read from
- *
- * Return: The character read
- */
-char _getc(__attribute__((unused)) FILE *stream)
-{
-	char c;
-
-	read(0, &c, 1);
-
-	return (c);
-}
-
-/**
  * error_message - prints error message for invalid command
  * @p: process number
+ * @s: the shell name
+ * @s: t\The command passed
  */
 void error_message(int p, char *s, char *cmd)
 {
@@ -58,4 +45,43 @@ void error_message(int p, char *s, char *cmd)
 	_puts(": ");
 	_puts(cmd);
 	_puts(" not found\n");
+}
+
+/**
+ * invalid_file - printts error message if file does not exist
+ * @s1: the shell name
+ * @s2: the shell first argument (filename)
+ */
+void invalid_file(char *s1, char *s2)
+{
+	_puts(s1);
+	_puts(": ");
+	_putchar('0');
+	_puts(": ");
+	_puts("Cant't open ");
+	_puts(s2);
+	_putchar('\n');
+}
+
+/**
+ * check_token - checks for string token
+ * @str: pointer to strings to check
+ *
+ * Return: 1 if the token matches
+ */
+int check_token(char **str)
+{
+	if (_strcomp(str[0], "setenv") && !(str[3]))
+		_setenv(str[1], str[2]);
+
+	else if (_strcomp(str[0], "unsetenv") && !str[2])
+		_unsetenv(str[1]);
+
+	else if (_strcomp(str[0], "exit"))
+		return (0);
+
+	else
+		return (-1);
+
+	return (1);
 }

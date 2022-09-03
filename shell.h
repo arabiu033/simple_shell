@@ -40,18 +40,21 @@ char *_strcpy(char *dest, char *src);
 int _strlen(char *s);
 int _strcomp(char *s1, char *s2);
 void print_number(int n);
+int word_len(char *str);
+int count_words(char *str);
 char **strtow(char *str);
 int _str_upper(char *str);
 int _isupper(int c);
+int check_token(char **str);
 
 /* write and read functions created */
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 char **_arguments(char *str);
 void _puts(char *str);
 int _putchar(char c);
 char _getc(FILE *stream);
 void error_message(int p, char *s, char *cmd);
-ssize_t print_line(int fd, char **cmd_ptr);
+ssize_t _getline(int fd, char **cmd_ptr);
+void invalid_file(char *s1, char *s2);
 
 /* malloc related fucntions */
 void free_pointer(char **ptr, int count);
@@ -67,6 +70,9 @@ int _setenv(char *name, char *value);
 int _unsetenv(char *name);
 char *_which(char *str);
 char *_pathFinder(lp *name, char *str);
+char **add_environment(char *name, char *value);
+char **remove_environment(int rmv);
+
 
 /* path related functions lp */
 lp *linked_list(lp **head, const char *str);
