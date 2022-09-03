@@ -4,9 +4,10 @@
  * handle_sigint - signal handling for SIGINT
  * @signum: SIGINT
  */
-void handle_sigint(__attribute__((unused)) int signum)
+void handle_sigint(int signum)
 {
-	printf("\n");
+	(void) signum;
+	_puts("\n");
 }
 
 /**
@@ -23,7 +24,7 @@ int main(int argc, char **argv, __attribute__((unused)) char **envp)
 {
 	char **args, *cmd;
 	/* size_t size = 0; */
-	int x = 1, atty = isatty(0), process_num = 0, fd = 0, n = 1;
+	int x = 1, process_num = 0, fd = 0;
 	ssize_t p = -1;
 	pid_t fork_process;
 
@@ -36,35 +37,28 @@ int main(int argc, char **argv, __attribute__((unused)) char **envp)
 			invalid_file(argv[0], argv[1]);
 			return (127);
 		}
-		n = 0;
 	}
 	while (x)
 	{
-		if (atty && n)
+		if (isatty(fd))
 			_puts("($) ");
 		p = print_line(fd, &cmd);
 		if (p == -1)
 			continue;
-		if (!p)
+		else if (!p)
 		{
-			if (atty && n)
+			if (isatty(fd))
 				_putchar('\n');
-			if (n == 0)
+			if (fd)
 				close(fd);
 			return (0);
 		}
 		args = strtow(cmd);
-
-		if (check_token(args) == 1)
-			continue;
-		else if (check_token(args) == 0)
-			return (0);
-
 		free(cmd);
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
-		if (fork_process == 0)
+		else if (fork_process == 0)
 		{
 			if (execve(args[0], args, environ) == -1)
 			{

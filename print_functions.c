@@ -74,7 +74,7 @@ int check_token(char **str)
 	if (_strcomp(str[0], "setenv") && !(str[3]))
 		_setenv(str[1], str[2]);
 
-	else if (_strcomp(str[0], "unsetenv") && !(str[2]))
+	else if (_strcomp(str[0], "unsetenv") && !str[2])
 		_unsetenv(str[1]);
 
 	else if (_strcomp(str[0], "exit"))
