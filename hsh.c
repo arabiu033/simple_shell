@@ -44,7 +44,10 @@ int main(int argc, char **argv)
 
 		p = _getline(fd, &cmd);
 		if (p == 1)
+		{
+			free(cmd);
 			continue;
+		}
 		else if (!p)
 		{
 			if (isatty(fd))
@@ -55,7 +58,17 @@ int main(int argc, char **argv)
 		}
 		args = strtow(cmd);
 
+		/**
+		 *if (check_token(args) == 1)
+		 *{
+		 *free(cmd);
+		 *free_array2D(args);
+		 *continue;
+		 *}
+		 */
+
 		s = _which(args[0]);
+
 		if (!stat(s, &st))
 			args[0] = s;
 		else
@@ -64,13 +77,6 @@ int main(int argc, char **argv)
 			continue;
 		}
 		free(cmd);
-		/**
-		 * if (check_token(args) == 1)
-		 * {
-		 * free_array2D(args);
-		 * continue;
-		 * }
-		 */
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
