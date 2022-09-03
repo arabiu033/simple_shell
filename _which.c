@@ -51,9 +51,9 @@ char *_pathFinder(lp *home, char *str)
 		}
 
 		head = head->next;
+		free(path);
 	}
 
-	free(path);
 	free_list(home);
 	return (str);
 }
