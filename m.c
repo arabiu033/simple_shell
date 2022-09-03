@@ -4,8 +4,7 @@ int main(void)
 {
 	char *s;;
 
-	puts("--T--");
-	s = _which("/ls");
+	s = _which("pwd");
 	printf("%s\n", s);
 
 	return (0);

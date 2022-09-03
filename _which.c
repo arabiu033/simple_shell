@@ -25,45 +25,34 @@ char *_which(char *str)
  */
 char *_pathFinder(lp *home, char *str)
 {
-	int start = 1, new_len, old_len, n, o;
+	int len, new_len;
 	lp *head;
-	char *s, *path;
+	char *path;
 	struct stat st;
 
 	head = home;
 	while (head)
 	{
-		new_len = _strlen(head->s) + _strlen(str) + 2;
-		n = _strlen(head->s) + 1;
+		len = _strlen(head->s);
 
-		if (start)
-		{
-			path = malloc(sizeof(char) * new_len);
-			s = malloc(sizeof(char) * n);
-			start = 0;
-		}
-		else
-		{
-			path = _realloc(path, sizeof(char) * old_len, sizeof(char) * new_len);
-			s = _realloc(s,  sizeof(char) * o, sizeof(char) * n);
-		}
+		path = strdup(head->s);
+		new_len = len + 2;
+		path = _realloc(path, sizeof(char) * len, sizeof(char) * new_len);
+		path = (_strcat(path, "/"));
+		len = new_len;
+		new_len = len + _strlen(str);
+		path = _realloc(path, sizeof(char) * len, sizeof(char) * new_len);
+		path = (_strcat(path, str));
 
-		s = head->s;
-		path = _strcat(_strcat(s, "/"), str);
-
-		if (!stat(s, &st))
+		if (!stat(path, &st))
 		{
-			free(s);
 			free_list(home);
 			return (path);
 		}
 
 		head = head->next;
-		old_len = new_len;
-		o = n;
 	}
 
-	free(s);
 	free(path);
 	free_list(home);
 	return (str);
