@@ -33,27 +33,19 @@ void print_number(int n)
 }
 
 /**
- * _strcomp - compares two strings if they are the same
- * @s1: string 1
- * @s2: string 2
+ * _strcmp - compares two strings
+ * @s1: first string
+ * @s2: second string
  *
- * Return: 1 on success
+ * Return: outputs the difference of s1 and s2
  */
-int _strcomp(char *s1, char *s2)
+int _strcmp(char *s1, char *s2)
 {
-	int len_s1 = _strlen(s1), len_s2 = _strlen(s2), i, j;
+	int i = 0;
 
-	if (len_s1 == len_s2)
-	{
-		for (i = 0; s1[i]; i++)
-		{
-			if (s1[i] == s2[i])
-				j++;
-		}
-		if (i == j)
-			return (1);
-	}
-	return (0);
+	while (*(s1 + i) && *(s2 + i) && (*(s1 + i) == *(s2 + i)))
+		i++;
+	return (*(s1 + i) - *(s2 + i));
 }
 
 /**

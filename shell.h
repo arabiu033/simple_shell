@@ -38,7 +38,7 @@ char *_strchr(char *s, char c);
 char *_strstr(char *haystack, char *needle);
 char *_strcpy(char *dest, char *src);
 int _strlen(char *s);
-int _strcomp(char *s1, char *s2);
+int _strcmp(char *s1, char *s2);
 void print_number(int n);
 int word_len(char *str);
 int count_words(char *str);
