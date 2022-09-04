@@ -12,7 +12,7 @@ char *_strtok(char *str, const char *delim)
 	char *token, del;
 	int strCount, delimCount, t;
 
-	str = str ? strdup(str) : holder;
+	str = str ? str : holder;
 	token = str;
 	for (strCount = 0; str && str[strCount]; strCount++)
 	{

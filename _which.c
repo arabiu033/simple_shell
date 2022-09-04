@@ -13,6 +13,7 @@ char *_which(char *str)
 		return (str);
 
 	head = _path_directories_list();
+	free_which(head, 1);
 	return (_pathFinder(head, str));
 
 }
@@ -36,25 +37,55 @@ char *_pathFinder(lp *home, char *str)
 		len = _strlen(head->s);
 
 		path = strdup(head->s);
+		if (!path)
+		{
+			free_list(home);
+			return (NULL);
+		}
 		new_len = len + 2;
 		path = _realloc(path, sizeof(char) * len, sizeof(char) * new_len);
+		if (!path)
+		{
+			free_list(home);
+			return (NULL);
+		}
 		path = (_strcat(path, "/"));
 		len = new_len;
 		new_len = len + _strlen(str);
 		path = _realloc(path, sizeof(char) * len, sizeof(char) * new_len);
+		if (!path)
+		{
+			free_list(home);
+			return (NULL);
+		}
 		path = (_strcat(path, str));
 
 		if (!stat(path, &st))
-		{
-			/* free_list(home); */
-			return (path);
-		}
+			return (NULL);
 
 		head = head->next;
 		free(path);
 	}
 
-
-	/* free_list(home); */
 	return (str);
+}
+
+/**
+ * free_which - free the linked list used by which
+ * @list: the linked-list
+ * @sig: signal when to free it
+ * Return: void - nothing
+ */
+void free_which(lp *head, int sig)
+{
+	static lp *home = NULL;
+
+	if (sig)
+	{
+		home = head;
+		return;
+	}
+
+	if (home)
+		free_list(home);
 }

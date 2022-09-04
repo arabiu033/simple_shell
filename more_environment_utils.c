@@ -17,12 +17,12 @@ char **add_environment(char *name, char *value)
 		;
 	new_len = old_len + 1;
 	environ_cpy = _realloc(environ_cpy, old_len * sizeof(char *), (new_len) * sizeof(char *));
-	if (environ_cpy == NULL)
+	if (!environ_cpy)
 		return (NULL);
 	environ_cpy[old_len] = NULL;
 	len = _strlen(name) + _strlen(value) + 2;
 	environ_cpy[old_len - 1] = malloc(len * sizeof(char));
-	if (environ_cpy[old_len - 1] == NULL)
+	if (!environ_cpy[old_len - 1])
 		return (NULL);
 	for (a = 0; name[a]; a++)
 		environ_cpy[old_len - 1][a] = name[a];
@@ -49,7 +49,7 @@ char **remove_environment(int rmv)
 	for (len = 0; environ[len]; len++)
 		;
 	new_environ = malloc(sizeof(char *) * len);
-	if (new_environ == NULL)
+	if (!new_environ)
 		return (NULL);
 
 	new_environ[len - 1] = NULL;
@@ -59,7 +59,7 @@ char **remove_environment(int rmv)
 		{
 			n = _strlen(environ[j]);
 			new_environ[k] = malloc(sizeof(char) * (n + 1));
-			if (new_environ[k] == NULL)
+			if (!new_environ[k])
 			{
 				for (x = 0; x < k; x++)
 					free(new_environ[x]);

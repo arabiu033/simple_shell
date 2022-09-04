@@ -19,11 +19,11 @@ void handle_sigint(__attribute__((unused)) int signum)
  */
 int main(int argc, char **argv)
 {
-	char **args, *cmd;
+	char **args, *cmd, *s;
 	int x = 1, process_num = 0, fd = 0;
 	ssize_t p;
 	pid_t fork_process;
-	/* struct stat st; */
+	struct stat st;
 
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, handle_sigint);
@@ -45,7 +45,10 @@ int main(int argc, char **argv)
 
 		p = _getline(fd, &cmd);
 		if (p == 1)
+		{
+			free(cmd);
 			continue;
+		}
 		else if (!p)
 		{
 			if (isatty(fd))
@@ -54,23 +57,31 @@ int main(int argc, char **argv)
 				close(fd);
 			return (0);
 		}
-		args = strtow(cmd);
+		args = _arguments(cmd);
 
-		if (check_token(args)  == 1)
+		if (check_token(args) == 1)
 		{
+			free(cmd);
 			free_array2D(args);
 			continue;
 		}
+		else if (check_token(args) == 0)
+		{
+			free(cmd);
+			free_array2D(args);
+			free_which(NULL, 0);
+			return (0);
+		}
 
-		/* s = _which(args[0]);
+		s = _which(args[0]);
 		if (!stat(s, &st))
 			args[0] = s;
 		else
 		{
-			error_message(x, argv[0], args[0]);
-			continue;
+			error_message(getpid() - getppid(), argv[0], args[0]);
+		continue;
 		}
-		*/
+
 		free(cmd);
 
 		fork_process = fork();
@@ -88,5 +99,6 @@ int main(int argc, char **argv)
 		wait(NULL);
 		free_array2D(args);
 	}
+	free_which(NULL, 0);
 	return (0);
 }
