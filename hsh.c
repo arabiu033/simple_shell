@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, handle_sigint);
-	chdir("~");
+
 	if (argc >= 2)
 	{
 		fd = open(argv[1], O_RDONLY);
