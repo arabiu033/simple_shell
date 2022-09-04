@@ -17,7 +17,7 @@ char *_getenv(const char *name)
 		s = _strstr(environ[i], str);
 		if (s)
 		{
-			_strtok(s, "=");
+			f_strtok(s, "=");
 			s = _strtok(NULL, "=");
 			return (s);
 		}
