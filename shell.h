@@ -74,9 +74,14 @@ void free_which(lp *head, int sig);
 char **add_environment(char *name, char *value);
 char **remove_environment(int rmv);
 
-
 /* path related functions lp */
 lp *linked_list(lp **head, const char *str);
 void free_list(lp *head);
+
+/* cd related functions */
+int _cd(char *path);
+int chdir_error(char *path);
+void free_cd(char **lwd, char **cwd);
+void update_pwd(char *path);
 
 #endif /* #define _SHELL_H_ */
