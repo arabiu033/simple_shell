@@ -19,7 +19,7 @@ void handle_sigint(__attribute__((unused)) int signum)
  */
 int main(int argc, char **argv)
 {
-	char **args, *cmd, *s;
+	char **args, *cmd, lol[15] = "Hello\n", *s = lol;
 	int x = 1, process_num = 0, fd = 0;
 	ssize_t p;
 	pid_t fork_process;
@@ -67,8 +67,9 @@ int main(int argc, char **argv)
 		}
 		else if (check_token(args) == 0)
 			break;
+		_puts(s);
 		s = _which(args[0]);
-		_puts("here\n");
+		_puts(s);
 		if (!stat(s, &st))
 			args[0] = s;
 		else

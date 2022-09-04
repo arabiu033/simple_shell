@@ -32,6 +32,7 @@ char *_pathFinder(lp *home, char *str)
 	struct stat st;
 
 	head = home;
+	_puts(head->s);
 	while (head)
 	{
 		_puts("start\n");
