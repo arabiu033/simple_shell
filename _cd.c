@@ -19,7 +19,7 @@ int _cd(char *path)
 	}
 	cwp = getcwd(cwp, 512);
 	lwd = !lwd ? strdup(cwp) : lwd;
-
+	_puts("uu")
 	if (path && *path == '.')
 	{
 		x = chdir(path);
