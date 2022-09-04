@@ -34,11 +34,13 @@ char *_pathFinder(lp *home, char *str)
 	head = home;
 	while (head)
 	{
+		_puts("start\n");
 		len = _strlen(head->s);
 
 		path = strdup(head->s);
 		if (!path)
 		{
+			_puts("malloc 1 failed\n");
 			free_list(home);
 			return (NULL);
 		}
@@ -46,6 +48,7 @@ char *_pathFinder(lp *home, char *str)
 		path = _realloc(path, sizeof(char) * len, sizeof(char) * new_len);
 		if (!path)
 		{
+			_puts("malloc 2 failed\n");
 			free_list(home);
 			return (NULL);
 		}
@@ -55,6 +58,7 @@ char *_pathFinder(lp *home, char *str)
 		path = _realloc(path, sizeof(char) * len, sizeof(char) * new_len);
 		if (!path)
 		{
+			_puts("malloc 3 failed\n");
 			free_list(home);
 			return (NULL);
 		}
@@ -63,6 +67,7 @@ char *_pathFinder(lp *home, char *str)
 		if (!stat(path, &st))
 			return (path);
 
+		_puts("end\n");
 		head = head->next;
 		free(path);
 	}

@@ -1,7 +1,5 @@
 #include "shell.h"
 
-char **strtow(char *str);
-
 /**
  * word_len - Locates the index marking the end of the
  *            first word contained within a string.

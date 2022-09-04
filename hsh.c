@@ -66,14 +66,9 @@ int main(int argc, char **argv)
 			continue;
 		}
 		else if (check_token(args) == 0)
-		{
-			free(cmd);
-			free_array2D(args);
-			free_which(NULL, 0);
-			return (0);
-		}
-
+			break;
 		s = _which(args[0]);
+		_puts("here\n");
 		if (!stat(s, &st))
 			args[0] = s;
 		else
@@ -99,6 +94,10 @@ int main(int argc, char **argv)
 		wait(NULL);
 		free_array2D(args);
 	}
+	free(cmd);
+	free_array2D(args);
 	free_which(NULL, 0);
-	return (0);
+	if (args[1] == NULL)
+		return (0);
+	return (atoi(args[1]));
 }
