@@ -85,13 +85,13 @@ int _setenv(char *name, char *value)
 	char **environ_cpy;
 	char *str;
 
-	if (_str_upper(name) == 0)
-		return (-1);
-	if (name == NULL)
+	if (!name || _strlen(name) == 0 || _strstr(name, "="))
 	{
-		perror("name is NULL");
+		errno = EINVAL;
+		perror("_setenv");
 		return (-1);
 	}
+
 	str = malloc(sizeof(char) * (_strlen((char *) name) + 2));
 	if (!str)
 		return (-1);
@@ -107,6 +107,12 @@ int _setenv(char *name, char *value)
 			old_len = _strlen(environ_cpy[i]) + 1;
 			environ_cpy[i] = _realloc(environ_cpy[i], old_len * sizeof(char),
 						  (new_len + 1) * sizeof(char));
+			if (environ_cpy[i] == NULL)
+			{
+				errno = ENOMEM;
+				perror("_setenv");
+				return (-1);
+			}
 			for (x = 0; value[x]; x++)
 			{
 				environ_cpy[i][j] = value[x];
@@ -120,6 +126,8 @@ int _setenv(char *name, char *value)
 	}
 	free(str);
 	environ = add_environment(name, value);
+	if (environ == NULL)
+		return (-1);
 
 	return (0);
 }
@@ -136,8 +144,12 @@ int _unsetenv(char *name)
 	int rmv;
 	char *str;
 
-	if (name == NULL)
+	if (_strlen(name) == 0 || _strstr(name, "="))
+	{
+		errno = EINVAL;
+		perror("_unsetenv");
 		return (-1);
+	}
 
 	str = malloc(sizeof(char) * (_strlen((char *) name) + 1));
 	if (!str)

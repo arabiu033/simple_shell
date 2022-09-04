@@ -72,6 +72,12 @@ int main(int argc, char **argv)
 			free_which(NULL, 0);
 			return (0);
 		}
+		else if (check_token(args) == -2)
+		{
+			free(cmd);
+			free_array2D(args);
+			continue;
+		}
 
 		s = _which(args[0]);
 		if (!stat(s, &st))
