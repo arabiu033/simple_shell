@@ -76,19 +76,18 @@ $
 
 |Name                |Information                        |Relevant Files                         |
 |----------------|-------------------------------|-----------------------------|
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
-|`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
+|`_getline.c`|(Description here)| None |
+|`_arguments.c`|(Description here)| `(Extra files needed by this particular file) or None` |
+|`environ_utils.c`|Contains functions related to the environent| `_getline` `_path_directories` `_path_directories_list` `_setenv` `unsetenv` |
+|`more_environ_utils.c`|Contains functions related to the environent| `add_environment` `remove_environment` `_which` `_pathfinder` |
+|`strfunc.c`|Contains functions relating to strings| `_strlen` `_strchr` `_strstr` `strcat` `_strcpy` |
+|`more_strfunc`|Contains more functions relating to strings)| `print_number` `_strcmp` `_str_upper` `_isupper` |
+|`even_more_strfunc`|Contains even more functions relating to strings| `_strtok` `check_token` |
+|`print_functions.c`|Contains functions relatung to stdout| `_puts` `_putchar` `error_message` `invalid_file` |
+|`memory_functions.c`|Contains memory management functions| `_realloc` `_malloc2D` `free_array2D` |
+|`link_utils.c`|Contains functions related to linked lists| `linked_list` `free_list` |
+|`hsh.c`|Contains the hsh shell main program| None |
+|`shell.h`| Header file| None |
 |`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
 |`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
 |`(File Name)`|(Description here)| `(Extra files needed by this particular file) or None` |
