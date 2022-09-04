@@ -71,6 +71,7 @@ void invalid_file(char *s1, char *s2)
  */
 int check_token(char **str)
 {
+
 	if (!(_strcmp(str[0], "setenv")) && !(str[3]))
 		_setenv(str[1], str[2]);
 

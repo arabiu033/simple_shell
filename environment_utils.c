@@ -11,6 +11,9 @@ char *_getenv(const char *name)
 	int i = 0;
 	char *str, *s = NULL;
 	str = malloc(sizeof(char) * (_strlen((char *) name) + 1));
+	if (!str)
+		return (NULL);
+
 	str = _strcat(_strcpy(str, (char *) name), "=");
 	while (environ[i])
 	{
@@ -90,6 +93,9 @@ int _setenv(char *name, char *value)
 		return (-1);
 	}
 	str = malloc(sizeof(char) * (_strlen((char *) name) + 2));
+	if (!str)
+		return (-1);
+
 	str = _strcat(_strcpy(str, (char *) name), "=");
 	for (i = 0; environ[i]; i++)
 	{
@@ -134,6 +140,8 @@ int _unsetenv(char *name)
 		return (-1);
 
 	str = malloc(sizeof(char) * (_strlen((char *) name) + 1));
+	if (!str)
+		return (-1);
 	str = _strcat(_strcpy(str, (char *) name), "=");
 	for (rmv = 0; environ[rmv]; rmv++)
 	{

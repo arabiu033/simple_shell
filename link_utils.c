@@ -12,9 +12,17 @@ lp *linked_list(lp **head, const char *str)
 	lp *new, *last;
 
 	new = malloc(sizeof(lp));
-	if (new == NULL)
+	if (!new)
 		return (NULL);
+
 	new->s = strdup(str);
+	if (!new->s)
+	{
+		free(new);
+		free_list(*head);
+		return (NULL);
+	}
+
 	new->next = NULL;
 
 	if (*head == NULL)

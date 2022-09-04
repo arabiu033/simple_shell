@@ -19,6 +19,8 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	if (ptr == NULL)
 	{
 		p = malloc(new_size);
+		if (!p)
+			return (NULL);
 		return (p);
 	}
 	else if (new_size == 0)
@@ -55,7 +57,7 @@ char **_malloc2D(char **array_2D)
 		;
 	size = n + 1;
 	holder = malloc((size) * sizeof(char *));
-	if (holder == NULL)
+	if (!holder)
 		return (NULL);
 	holder[n] = NULL;
 	while (j < n)

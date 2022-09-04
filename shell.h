@@ -42,7 +42,7 @@ int _strcmp(char *s1, char *s2);
 void print_number(int n);
 int word_len(char *str);
 int count_words(char *str);
-char **strtow(char *str);
+char **_arguments(char *str);
 int _str_upper(char *str);
 int _isupper(int c);
 int check_token(char **str);
@@ -70,6 +70,7 @@ int _setenv(char *name, char *value);
 int _unsetenv(char *name);
 char *_which(char *str);
 char *_pathFinder(lp *name, char *str);
+void free_which(lp *head, int sig);
 char **add_environment(char *name, char *value);
 char **remove_environment(int rmv);
 

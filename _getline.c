@@ -18,6 +18,9 @@ ssize_t _getline(int fd, char **cmd_ptr)
 	if (c != '\n')
 	{
 		commands = malloc(sizeof(char) * 5);
+		if (!commands)
+			return (0);
+
 		old_size = new_size = 5;
 		commands[len] = c;
 		len++;
