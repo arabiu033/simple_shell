@@ -78,8 +78,8 @@ int main(int argc, char **argv)
 			args[0] = s;
 		else
 		{
-			error_message(getpid() - getppid(), argv[0], args[0]);
-		continue;
+			error_message(x-1, argv[0], args[0]);
+			continue;
 		}
 
 		free(cmd);

@@ -61,7 +61,7 @@ char *_pathFinder(lp *home, char *str)
 		path = (_strcat(path, str));
 
 		if (!stat(path, &st))
-			return (NULL);
+			return (path);
 
 		head = head->next;
 		free(path);
