@@ -19,7 +19,7 @@ void handle_sigint(__attribute__((unused)) int signum)
  */
 int main(int argc, char **argv)
 {
-	char **args, *cmd,*s;
+	char **args, *cmd, *s;
 	int process_num = 0, fd = 0, ex, x = 1;
 	ssize_t p;
 	pid_t fork_process;
@@ -44,6 +44,7 @@ int main(int argc, char **argv)
 			_puts("($) ");
 
 		p = _getline(fd, &cmd);
+
 		if (p == 1)
 			continue;
 
@@ -69,6 +70,10 @@ int main(int argc, char **argv)
 		{
 			free_array2D(args);
 			continue;
+		}
+		else if (check_token(args) == 2)
+		{
+			args[1] = echo_var(args[1]);
 		}
 
 		s = _which(args[0]);
@@ -104,9 +109,10 @@ int main(int argc, char **argv)
 		 * if (xyz)
 		 * free_array2D(environ);
 		 */
-		ex = 1 * atoi(args[1]);
+		ex = 1 * _atoi(args[1]);
 		free_array2D(args);
 		free_which(NULL, 0);
+		
 		return (ex);
 	}
 	/**

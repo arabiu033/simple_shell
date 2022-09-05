@@ -46,6 +46,8 @@ char **_arguments(char *str);
 int _str_upper(char *str);
 int _isupper(int c);
 int check_token(char **str);
+int _atoi(char *s);
+char *_tostr(long unsigned int n);
 
 /* write and read functions created */
 char **_arguments(char *str);
@@ -73,6 +75,7 @@ char *_pathFinder(lp *name, char *str);
 void free_which(lp *head, int sig);
 char **add_environment(char *name, char *value);
 char **remove_environment(int rmv);
+char *echo_var(char *str);
 
 /* path related functions lp */
 lp *linked_list(lp **head, const char *str);

@@ -62,36 +62,3 @@ void invalid_file(char *s1, char *s2)
 	_puts(s2);
 	_putchar('\n');
 }
-
-/**
- * check_token - checks for string token
- * @str: pointer to strings to check
- *
- * Return: 1 if the token matches
- */
-int check_token(char **str)
-{
-
-	if (!(_strcmp(str[0], "setenv")) && !(str[3]))
-	{
-		if(_setenv(str[1], str[2]) == -1)
-			return (-2);
-	}
-
-	else if (!(_strcmp(str[0], "unsetenv")) && !str[2])
-	{
-		if (_unsetenv(str[1]) == -1)
-			return (-2);
-	}
-
-	else if (!(_strcmp(str[0], "exit")))
-		return (0);
-
-	else if (!(_strcmp(str[0], "cd")))
-	        str[1] ? _cd(str[1]) : _cd(NULL);
-
-	else
-		return (-1);
-
-	return (1);
-}
