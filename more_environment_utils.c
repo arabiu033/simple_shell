@@ -19,11 +19,13 @@ char **add_environment(char *name, char *value)
 	environ_cpy = _realloc(environ_cpy, old_len * sizeof(char *), (new_len) * sizeof(char *));
 	if (!environ_cpy)
 		return (NULL);
+
 	environ_cpy[old_len] = NULL;
 	len = _strlen(name) + _strlen(value) + 2;
 	environ_cpy[old_len - 1] = malloc(len * sizeof(char));
 	if (!environ_cpy[old_len - 1])
 		return (NULL);
+
 	for (a = 0; name[a]; a++)
 		environ_cpy[old_len - 1][a] = name[a];
 	environ_cpy[old_len - 1][a] = '=';
@@ -31,7 +33,6 @@ char **add_environment(char *name, char *value)
 	for (i = 0; value[i]; i++, a++)
 		environ_cpy[old_len - 1][a] = value[i];
 	environ_cpy[old_len - 1][a] = '\0';
-
 	return (environ_cpy);
 }
 

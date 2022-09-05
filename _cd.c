@@ -113,5 +113,5 @@ void free_cd(char **lwd, char **cwd)
 void update_pwd(char *path)
 {
 	_setenv("PWD", path);
-	/* free(path); */
+	free(path);
 }

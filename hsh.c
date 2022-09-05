@@ -19,8 +19,8 @@ void handle_sigint(__attribute__((unused)) int signum)
  */
 int main(int argc, char **argv)
 {
-	char **args, *cmd, *s;
-	int x = 1, process_num = 0, fd = 0;
+	char **args, *cmd,*s;
+	int process_num = 0, fd = 0, ex, x = 1;
 	ssize_t p;
 	pid_t fork_process;
 	struct stat st;
@@ -56,19 +56,19 @@ int main(int argc, char **argv)
 			return (0);
 		}
 		args = _arguments(cmd);
+		free(cmd);
 
 		if (check_token(args) == 1)
 		{
-			free(cmd);
 			free_array2D(args);
 			continue;
 		}
 		else if (check_token(args) == 0)
+			break;
+		else if (check_token(args) == -2)
 		{
-			free(cmd);
 			free_array2D(args);
-			free_which(NULL, 0);
-			return (0);
+			continue;
 		}
 
 		s = _which(args[0]);
@@ -76,11 +76,12 @@ int main(int argc, char **argv)
 			args[0] = s;
 		else
 		{
-			error_message(x-1, argv[0], args[0]);
+			error_message(x - 1, argv[0], args[0]);
+			free_array2D(args);
 			continue;
 		}
 
-		free(cmd);
+		/* free(cmd); */
 
 		fork_process = fork();
 		if (fork_process == -1)
@@ -97,6 +98,22 @@ int main(int argc, char **argv)
 		wait(NULL);
 		free_array2D(args);
 	}
+	if (args[1])
+	{
+		/**
+		 * if (xyz)
+		 * free_array2D(environ);
+		 */
+		ex = 1 * atoi(args[1]);
+		free_array2D(args);
+		free_which(NULL, 0);
+		return (ex);
+	}
+	/**
+	 * if (xyz)
+	 * free_array2D(environ);
+	 */
+	free_array2D(args);
 	free_which(NULL, 0);
 	return (0);
 }

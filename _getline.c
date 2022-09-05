@@ -34,6 +34,8 @@ ssize_t _getline(int fd, char **cmd_ptr)
 				old_size = new_size;
 			}
 			n = read(fd, &c, 1);
+			if (n != 1)
+				break;
 			if (!c)
 				return (0);
 			if (c == '\n')
