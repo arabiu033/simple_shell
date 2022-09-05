@@ -22,8 +22,7 @@ ssize_t _getline(int fd, char **cmd_ptr)
 			return (0);
 
 		old_size = new_size = 5;
-		commands[len] = c;
-		len++;
+		commands[len++] = c;
 		while (n == 1)
 		{
 			if (len == old_size)
@@ -40,8 +39,9 @@ ssize_t _getline(int fd, char **cmd_ptr)
 				return (0);
 			if (c == '\n')
 				break;
-			commands[len] = c;
-			len++;
+			if (c == ';')
+				break;
+			commands[len++] = c;
 		}
 	}
 	else

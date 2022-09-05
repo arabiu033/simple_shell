@@ -22,7 +22,7 @@ void handle_sigint(__attribute__((unused)) int signum)
 int main(int argc, char **argv)
 {
 	char **args, *cmd, *s;
-	int process_num = 0, fd = 0, ex, x = 1, a;
+	int fd = 0, ex, x = 1, a;
 	ssize_t p;
 	pid_t fork_process;
 	struct stat st;
@@ -94,19 +94,12 @@ int main(int argc, char **argv)
 			continue;
 		}
 
-		/* free(cmd); */
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
 		else if (fork_process == 0)
-		{
-			if (execve(args[0], args, environ) == -1)
-			{
-				process_num++;
-				error_message(getpid() - getppid(), argv[0], args[0]);
-				kill(getpid(), SIGQUIT);
-			}
-		}
+			execve(args[0], args, environ);
+
 		wait(NULL);
 		free_array2D(args);
 	}
