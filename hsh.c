@@ -20,7 +20,7 @@ void handle_sigint(__attribute__((unused)) int signum)
 int main(int argc, char **argv)
 {
 	char **args, *cmd, *s;
-	int process_num = 0, fd = 0, ex, x = 1;
+	int process_num = 0, fd = 0, ex, x = 1, a;
 	ssize_t p;
 	pid_t fork_process;
 	struct stat st;
@@ -59,6 +59,15 @@ int main(int argc, char **argv)
 		args = _arguments(cmd);
 		free(cmd);
 
+		for (a = 0; args[a]; a++)
+		{
+			if (args[a][0] == '#' && !(args[a][1]))
+			{
+				args[a] = NULL;
+				break;
+			}
+		}
+
 		if (check_token(args) == 1)
 		{
 			free_array2D(args);
@@ -87,7 +96,6 @@ int main(int argc, char **argv)
 		}
 
 		/* free(cmd); */
-
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
@@ -112,7 +120,6 @@ int main(int argc, char **argv)
 		ex = 1 * _atoi(args[1]);
 		free_array2D(args);
 		free_which(NULL, 0);
-		
 		return (ex);
 	}
 	/**

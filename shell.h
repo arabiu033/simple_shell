@@ -18,6 +18,8 @@
 #define SIGQUIT 3   /* Quit the process */
 extern char **environ;
 
+
+
 /**
  * struct linked_path - singly linked list
  * @s: string to break into link list
