@@ -11,22 +11,19 @@ int _cd(char *path)
 	static char *lwd = NULL;
 	int x;
 
-	if (!lwd)
-	{
-		cwp = malloc(sizeof(char) * 512);
-		if (!cwp)
-			return (-1);
-	}
+	cwp = malloc(sizeof(char) * 512);
+	if (!cwp)
+		return (-1);
 	cwp = getcwd(cwp, 512);
 	lwd = !lwd ? strdup(cwp) : lwd;
-	_puts("uu")
+
 	if (path && *path == '.')
 	{
 		x = chdir(path);
 		if (x && chdir_error(path))
 			return (x);
 	}
-	else if ((path && _strlen(path) == 1 && *path == '~') || !path)
+	else if (!path || (path && _strlen(path) == 1 && *path == '~'))
 	{
 		path = _getenv("HOME");
 		x = chdir(path);
@@ -49,6 +46,7 @@ int _cd(char *path)
 		str = _strcat(str, path);
 
 		x = chdir(str);
+		free(str);
 		if (x && chdir_error(str))
 			return (x);
 	}
@@ -63,11 +61,11 @@ int _cd(char *path)
 	{
 		free(lwd);
 		lwd = strdup(cwp);
+		free(cwp);
 		free_cd(&lwd, &cwp);
 		buf = malloc(sizeof(char) * 512);
 		update_pwd(getcwd(buf, 512));
 	}
-	free(str);
 	return (x);
 
 }
@@ -114,6 +112,6 @@ void free_cd(char **lwd, char **cwd)
  */
 void update_pwd(char *path)
 {
-	_setenv("PATH", path);
-	free(path);
+	_setenv("PWD", path);
+	/* free(path); */
 }

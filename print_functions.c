@@ -82,7 +82,7 @@ int check_token(char **str)
 		return (0);
 
 	else if (!(_strcmp(str[0], "cd")))
-		str[1] ? _cd(str[1]) : _cd(NULL);
+	        str[1] ? _cd(str[1]) : _cd(NULL);
 
 	else
 		return (-1);

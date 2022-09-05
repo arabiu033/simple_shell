@@ -8,8 +8,8 @@
  */
 char *_getenv(const char *name)
 {
-	int i = 0;
-	char *str, *s = NULL;
+	int i = 0, len;
+	char *str, *s = NULL, *ss;
 	str = malloc(sizeof(char) * (_strlen((char *) name) + 1));
 	if (!str)
 		return (NULL);
@@ -20,11 +20,21 @@ char *_getenv(const char *name)
 		s = _strstr(environ[i], str);
 		if (s)
 		{
-			_strtok(s, "=");
-			s = _strtok(NULL, "=");
-			return (s);
+			len = _strlen(s);
+			ss = malloc(sizeof(char) * (len + 1));
+			if (!ss)
+				return (NULL);
+
+			for (i = 0; i < len; i++)
+				ss[i] = s[i];
+			ss[i] = '\0';
+
+			_strtok(ss, "=");
+			ss = _strtok(NULL, "=");
+			return (ss);
 		}
 		i++;
+
 	}
 	free(str);
 	return (s);
@@ -39,6 +49,8 @@ void _path_directories(void)
 	char *path, *dir;
 
 	path = _getenv("PATH");
+	if (path)
+		return;
 	dir = _strtok(path, ":");
 	while (dir)
 	{
@@ -61,6 +73,8 @@ lp *_path_directories_list(void)
 		return (head);
 
 	path = _getenv("PATH");
+	if (!path)
+		return (NULL);
 	dir = _strtok(path, ":");
 	while (dir)
 	{

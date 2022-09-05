@@ -45,10 +45,8 @@ int main(int argc, char **argv)
 
 		p = _getline(fd, &cmd);
 		if (p == 1)
-		{
-			free(cmd);
 			continue;
-		}
+
 		else if (!p)
 		{
 			if (isatty(fd))
