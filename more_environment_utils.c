@@ -18,20 +18,14 @@ char **add_environment(char *name, char *value)
 	new_len = old_len + 1;
 	environ_cpy = _realloc(environ_cpy, old_len * sizeof(char *), (new_len) * sizeof(char *));
 	if (!environ_cpy)
-	{
-		errno = ENOMEM;
-		perror("_setenv");
 		return (NULL);
-	}
+
 	environ_cpy[old_len] = NULL;
 	len = _strlen(name) + _strlen(value) + 2;
 	environ_cpy[old_len - 1] = malloc(len * sizeof(char));
 	if (!environ_cpy[old_len - 1])
-	{
-		errno = ENOMEM;
-		perror("_setenv");
 		return (NULL);
-	}
+
 	for (a = 0; name[a]; a++)
 		environ_cpy[old_len - 1][a] = name[a];
 	environ_cpy[old_len - 1][a] = '=';

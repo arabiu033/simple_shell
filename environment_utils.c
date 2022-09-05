@@ -94,7 +94,11 @@ int _setenv(char *name, char *value)
 
 	str = malloc(sizeof(char) * (_strlen((char *) name) + 2));
 	if (!str)
+	{
+		errno = ENOMEM;
+		perror("_setenv");
 		return (-1);
+	}
 
 	str = _strcat(_strcpy(str, (char *) name), "=");
 	for (i = 0; environ[i]; i++)
@@ -127,7 +131,11 @@ int _setenv(char *name, char *value)
 	free(str);
 	environ = add_environment(name, value);
 	if (environ == NULL)
+	{
+		errno = ENOMEM;
+		perror("_setenv");
 		return (-1);
+	}
 
 	return (0);
 }
