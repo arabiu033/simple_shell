@@ -44,7 +44,6 @@ int main(int argc, char **argv)
 			_puts("($) ");
 
 		p = _getline(fd, &cmd);
-
 		if (p == 1)
 			continue;
 
@@ -81,9 +80,7 @@ int main(int argc, char **argv)
 			continue;
 		}
 		else if (check_token(args) == 2)
-		{
 			args[1] = echo_var(args[1]);
-		}
 
 		s = _which(args[0]);
 		if (!stat(s, &st))

@@ -103,7 +103,7 @@ int _setenv(char *name, char *value)
 	if (!name || _strlen(name) == 0 || _strstr(name, "="))
 	{
 		errno = EINVAL;
-		perror("_setenv");
+		perror("_seenv");
 		return (-1);
 	}
 

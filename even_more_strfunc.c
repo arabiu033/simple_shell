@@ -114,16 +114,16 @@ int check_token(char **str)
 {
 
 	if (!(_strcmp(str[0], "setenv")) && !(str[3]))
-		{
-			if(_setenv(str[1], str[2]) == -1)
-				return (-2);
-		}
+	{
+		if(_setenv(str[1], str[2]) == -1)
+			return (-2);
+	}
 
 	else if (!(_strcmp(str[0], "unsetenv")) && !str[2])
-		{
-			if (_unsetenv(str[1]) == -1)
-				return (-2);
-		}
+	{
+		if (_unsetenv(str[1]) == -1)
+			return (-2);
+	}
 
 	else if (!(_strcmp(str[0], "exit")))
 		return (0);
