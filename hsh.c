@@ -87,6 +87,7 @@ here:
 			args[1] = echo_var(args[1]);
 
 		s = _which(args[0]);
+
 		if (!stat(s, &st))
 			args[0] = s;
 		else

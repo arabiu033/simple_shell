@@ -9,8 +9,8 @@ static char *holder = NULL;
  */
 char *_strtok(char *str, const char *delim)
 {
-	char *token, del;
-	int strCount, delimCount, t;
+	char *token = NULL, del;
+	int strCount, delimCount, t = 0;
 
 	str = str ? str : holder;
 	token = str;
