@@ -33,14 +33,10 @@ ssize_t _getline(int fd, char **cmd_ptr)
 				old_size = new_size;
 			}
 			n = read(fd, &c, 1);
-			if (n != 1)
+			if (n != 1 || c == '\n' || c == ';')
 				break;
-			if (!c)
+			else if (!c)
 				return (0);
-			if (c == '\n')
-				break;
-			if (c == ';')
-				break;
 			commands[len++] = c;
 		}
 	}

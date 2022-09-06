@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 			return (0);
 		}
 		args = _arguments(cmd);
-		free(cmd);
+		/* free(cmd); */
 
 		for (a = 0; args[a]; a++)
 		{
@@ -91,6 +91,7 @@ int main(int argc, char **argv)
 		{
 			error_message(x - 1, argv[0], args[0]);
 			free_array2D(args);
+			if (p != _strlen(cmd))
 			continue;
 		}
 
