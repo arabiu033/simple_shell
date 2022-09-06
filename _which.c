@@ -39,6 +39,7 @@ char *_pathFinder(lp *home, char *str)
 		path = strdup(head->s);
 		if (!path)
 		{
+			_puts("one");
 			free_list(home);
 			return (NULL);
 		}
@@ -46,6 +47,7 @@ char *_pathFinder(lp *home, char *str)
 		path = _realloc(path, sizeof(char) * (len + 1), sizeof(char) * new_len);
 		if (!path)
 		{
+			_puts("Two");
 			free_list(home);
 			return (NULL);
 		}
@@ -55,6 +57,7 @@ char *_pathFinder(lp *home, char *str)
 		path = _realloc(path, sizeof(char) * len, sizeof(char) * new_len);
 		if (!path)
 		{
+			_puts("one");
 			free_list(home);
 			return (NULL);
 		}
@@ -65,8 +68,9 @@ char *_pathFinder(lp *home, char *str)
 
 		head = head->next;
 		free(path);
+		_puts(head->s);
 	}
-
+	_puts("sss");
 	return (str);
 }
 

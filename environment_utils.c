@@ -8,37 +8,34 @@
  */
 char *_getenv(const char *name)
 {
-	int i = 0, len;
-	char *str, *s = NULL, *ss;
+	int i, j, x;
+	char *delim = "=";
+	char *buf, *holder = NULL;
+	char *token, *token_ptr = NULL;
 
-	str = malloc(sizeof(char) * (_strlen((char *) name) + 2));
-	if (!str)
-		return (NULL);
-
-	str = _strcat(_strcpy(str, (char *) name), "=");
-	while (environ[i])
+	for (i = 0; environ[i]; i++)
 	{
-		s = _strstr(environ[i], str);
-		if (s)
+		for (j = 0; environ[i][j]; j++)
+			;
+		holder = malloc(sizeof(char) * (j + 1));
+		if (holder == NULL)
+			return (NULL);
+		_strcpy(holder, environ[i]);
+		buf = _strtok(holder, delim);
+		x = _strcmp(buf, name);
+		if (!x)
 		{
-			len = _strlen(s);
-			ss = malloc(sizeof(char) * (len + 1));
-			if (!ss)
-				return (NULL);
-
-			for (i = 0; i < len; i++)
-				ss[i] = s[i];
-			ss[i] = '\0';
-
-			_strtok(ss, "=");
-			ss = _strtok(NULL, "=");
-			return (ss);
+			buf = _strtok(NULL, delim);
+			break;
 		}
-		i++;
-
+		free(holder);
 	}
-	free(str);
-	return (s);
+	token = malloc(sizeof(char) * _strlen(buf));
+	if (token == NULL)
+		return (NULL);
+	token_ptr = _strcpy(token, buf);
+	free(holder);
+	return (token_ptr);
 }
 
 /**
