@@ -98,8 +98,14 @@ int main(int argc, char **argv)
 		if (fork_process == -1)
 			return (-1);
 		else if (fork_process == 0)
-			execve(args[0], args, environ);
-
+		{
+			if (execve(args[0], args, environ) == -1)
+			{
+				error_message(x - 1, argv[0], args[0]);
+				free_array2D(args);
+				kill(getpid(), SIGQUIT);
+			}
+		}
 		wait(NULL);
 		free_array2D(args);
 	}
