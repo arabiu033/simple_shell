@@ -66,7 +66,7 @@ char **_malloc2D(char **array_2D);
 void free_array2D(char **array_2D);
 
 /* environment related functions */
-char *_getenv(char *name);
+char *_getenv(const char *name);
 void _path_directories(void);
 lp *_path_directories_list(void);
 int _setenv(char *name, char *value);
