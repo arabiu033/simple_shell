@@ -6,36 +6,39 @@
  *
  * Return: the value of the environments variable whose name was given
  */
-char *_getenv(char *name)
+char *_getenv(const char *name)
 {
-	int i, j, x;
-	char *delim = "=";
-	char *buf, *holder = NULL;
-	char *token, *token_ptr = NULL;
+	int i = 0, len;
+	char *str, *s = NULL, *ss;
 
-	for (i = 0; environ[i]; i++)
-	{
-		for (j = 0; environ[i][j]; j++)
-			;
-		holder = malloc(sizeof(char) * (j + 1));
-		if (holder == NULL)
-			return (NULL);
-		_strcpy(holder, environ[i]);
-		buf = _strtok(holder, delim);
-		x = _strcmp(buf, name);
-		if (!x)
-		{
-			buf = _strtok(NULL, delim);
-			break;
-		}
-		free(holder);
-	}
-	token = malloc(sizeof(char) * _strlen(buf));
-	if (token == NULL)
+	str = malloc(sizeof(char) * (_strlen((char *) name) + 2));
+	if (!str)
 		return (NULL);
-	token_ptr = _strcpy(token, buf);
-	free(holder);
-	return (token_ptr);
+
+	str = _strcat(_strcpy(str, (char *) name), "=");
+	while (environ[i])
+	{
+		s = _strstr(environ[i], str);
+		if (s)
+		{
+			len = _strlen(s);
+			ss = malloc(sizeof(char) * (len + 1));
+			if (!ss)
+				return (NULL);
+
+			for (i = 0; i < len; i++)
+				ss[i] = s[i];
+			ss[i] = '\0';
+
+			_strtok(ss, "=");
+			ss = _strtok(NULL, "=");
+			return (ss);
+		}
+		i++;
+
+	}
+	free(str);
+	return (s);
 }
 
 /**
