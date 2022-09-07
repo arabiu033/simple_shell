@@ -21,8 +21,8 @@ void handle_sigint(__attribute__((unused)) int signum)
  */
 int main(int argc, char **argv)
 {
-	char **args, *cmd, *s = NULL;
-	int fd = 0, ex, x = 1, a, len_cmd;
+	char **args, *cmd, *s;
+	int fd = 0, ex, x = 1, a;
 	ssize_t p;
 	pid_t fork_process;
 	struct stat st;
@@ -46,16 +46,9 @@ int main(int argc, char **argv)
 		if (isatty(fd))
 			_puts("($) ");
 
-here:
 		p = _getline(fd, &cmd);
-		len_cmd = 1 * _strlen(cmd);
-		print_number(p);
 		if (p == 1)
-		{
-			print_number(p);
-			free(cmd);
 			continue;
-		}
 
 		else if (!p)
 		{
@@ -91,37 +84,26 @@ here:
 		}
 
 		s = _which(args[0]);
-
 		if (!stat(s, &st))
 			args[0] = s;
 		else
 		{
 			error_message(x - 1, argv[0], args[0]);
 			free_array2D(args);
-			if (p != len_cmd)
-				goto here;
 			continue;
 		}
 
 		if (_strstr(args[0], "echo") && args[1])
-		    args[1] = echo_var(args[1]);
+			args[1] = echo_var(args[1]);
 
 		fork_process = fork();
 		if (fork_process == -1)
 			return (-1);
 		else if (fork_process == 0)
-		{
-			if (execve(args[0], args, environ) == -1)
-			{
-				error_message(x - 1, argv[0], args[0]);
-				free_array2D(args);
-				kill(getpid(), SIGQUIT);
-			}
-		}
+			execve(args[0], args, environ);
+
 		wait(NULL);
 		free_array2D(args);
-		if (p != len_cmd)
-			goto here;
 	}
 	if (args[1])
 	{
