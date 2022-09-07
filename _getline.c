@@ -9,7 +9,7 @@
 ssize_t _getline(int fd, char **cmd_ptr)
 {
 	char c;
-	ssize_t n, len = 0, new_size, old_size, x = 0;
+	ssize_t n, len = 0, new_size, old_size;
 	static char *commands;
 
 	n = read(fd, &c, 1);
@@ -33,12 +33,8 @@ ssize_t _getline(int fd, char **cmd_ptr)
 				old_size = new_size;
 			}
 			n = read(fd, &c, 1);
-			if (n != 1 || c == '\n' || c == ';')
-			{
-				if (c == ';')
-					x = 1;
+			if (n != 1 || c == '\n')
 				break;
-			}
 			else if (!c)
 				return (0);
 			commands[len++] = c;
@@ -52,7 +48,6 @@ ssize_t _getline(int fd, char **cmd_ptr)
 			    new_size * sizeof(char));
 	commands[len] = '\0';
 	*cmd_ptr = commands;
-	if (x)
-		return (len + 1);
+
 	return (len);
 }
