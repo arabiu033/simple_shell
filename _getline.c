@@ -45,8 +45,11 @@ ssize_t _getline(int fd, char **cmd_ptr)
 			commands[len++] = c;
 		}
 	}
-	else
+	else if (c == '\n')
+	{
+		_puts("lol\n");
 		return (1);
+	}
 	old_size = new_size;
 	new_size = len + 1;
 	commands = _realloc(commands, old_size * sizeof(char),

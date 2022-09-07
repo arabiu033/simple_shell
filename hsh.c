@@ -21,12 +21,13 @@ void handle_sigint(__attribute__((unused)) int signum)
  */
 int main(int argc, char **argv)
 {
-	char **args, *cmd, *s;
+	char **args, *cmd, *s = NULL;
 	int fd = 0, ex, x = 1, a, len_cmd;
 	ssize_t p;
 	pid_t fork_process;
 	struct stat st;
 
+	environ = _malloc2D(environ);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, handle_sigint);
 
@@ -45,11 +46,16 @@ int main(int argc, char **argv)
 		if (isatty(fd))
 			_puts("($) ");
 
-	here:
+here:
 		p = _getline(fd, &cmd);
 		len_cmd = 1 * _strlen(cmd);
+		print_number(p);
 		if (p == 1)
+		{
+			print_number(p);
+			free(cmd);
 			continue;
+		}
 
 		else if (!p)
 		{
@@ -83,8 +89,6 @@ int main(int argc, char **argv)
 			free_array2D(args);
 			continue;
 		}
-		else if (check_token(args) == 2)
-			args[1] = echo_var(args[1]);
 
 		s = _which(args[0]);
 
@@ -98,6 +102,9 @@ int main(int argc, char **argv)
 				goto here;
 			continue;
 		}
+
+		if (_strstr(args[0], "echo") && args[1])
+		    args[1] = echo_var(args[1]);
 
 		fork_process = fork();
 		if (fork_process == -1)
@@ -118,19 +125,13 @@ int main(int argc, char **argv)
 	}
 	if (args[1])
 	{
-		/**
-		 * if (xyz)
-		 * free_array2D(environ);
-		 */
+		free_array2D(environ);
 		ex = 1 * _atoi(args[1]);
 		free_array2D(args);
 		free_which(NULL, 0);
 		return (ex);
 	}
-	/**
-	 * if (xyz)
-	 * free_array2D(environ);
-	 */
+	free_array2D(environ);
 	free_array2D(args);
 	free_which(NULL, 0);
 	return (0);

@@ -131,9 +131,6 @@ int check_token(char **str)
 	else if (!(_strcmp(str[0], "cd")))
 		str[1] ? _cd(str[1]) : _cd(NULL);
 
-	else if (!(strcmp(str[0], "echo")) && str[1])
-		return (2);
-
 	else
 		return (-1);
 

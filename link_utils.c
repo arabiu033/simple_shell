@@ -10,7 +10,6 @@
 lp *linked_list(lp **head, const char *str)
 {
 	lp *new, *last;
-	
 
 	new = malloc(sizeof(lp));
 	if (!new)

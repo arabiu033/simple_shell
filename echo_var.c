@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * echo_var - checks for echo expansion
+ * @str: echo arguments
+ *
+ * Return: the expansion or the argument
+ */
 char *echo_var(char *str)
 {
 	char *ptr, *holder;
@@ -20,6 +26,7 @@ char *echo_var(char *str)
 			for (i = 0; holder[i]; i++)
 				str[i] = holder[i];
 			str[i] = '\0';
+			/* free(holder); */
 			return (str);
 		}
 	}

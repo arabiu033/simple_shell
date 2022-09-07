@@ -42,8 +42,8 @@ char *_pathFinder(lp *home, char *str)
 			free_list(home);
 			return (NULL);
 		}
-		new_len = len + 2;
-		path = _realloc(path, sizeof(char) * (len + 1), sizeof(char) * new_len);
+		new_len = len + 1;
+		path = _realloc(path, sizeof(char) * (len + 2), sizeof(char) * new_len);
 		if (!path)
 		{
 			free_list(home);
