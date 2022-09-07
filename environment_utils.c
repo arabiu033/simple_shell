@@ -11,14 +11,14 @@ char *_getenv(const char *name)
 	int i = 0, len;
 	char *str, *s = NULL, *ss;
 
-	str = malloc(sizeof(char) * (_strlen((char *) name) + 2));
+	str = malloc(sizeof(char) * (_strlen((char *) name) + 1));
 	if (!str)
 		return (NULL);
 
 	str = _strcat(_strcpy(str, (char *) name), "=");
 	while (environ[i])
 	{
-		s = _strstr(environ[i], str);
+		s = _strstr(environ[i], str) && environ[i][0] == str[0] ? _strstr(environ[i], str) : NULL;
 		if (s)
 		{
 			len = _strlen(s);

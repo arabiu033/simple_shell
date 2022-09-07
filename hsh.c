@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 		if (isatty(fd))
 			_puts("($) ");
 
-here:
+	here:
 		p = _getline(fd, &cmd);
 		len_cmd = 1 * _strlen(cmd);
 		if (p == 1)

@@ -36,7 +36,7 @@ char *_pathFinder(lp *home, char *str)
 	{
 		len = _strlen(head->s);
 
-		path = strdup(head->s);
+		path = _strdup(head->s);
 		if (!path)
 		{
 			free_list(home);
@@ -66,7 +66,6 @@ char *_pathFinder(lp *home, char *str)
 		head = head->next;
 		free(path);
 	}
-
 	return (str);
 }
 
