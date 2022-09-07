@@ -36,7 +36,7 @@ char *_pathFinder(lp *home, char *str)
 	{
 		len = _strlen(head->s);
 
-		path = strdup(head->s);
+		path = _strdup(head->s);
 		if (!path)
 		{
 			_puts("one");

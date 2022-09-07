@@ -16,7 +16,8 @@ char **add_environment(char *name, char *value)
 	for (old_len = 1; environ[old_len]; old_len++)
 		;
 	new_len = old_len + 1;
-	environ_cpy = _realloc(environ_cpy, old_len * sizeof(char *), (new_len) * sizeof(char *));
+	environ_cpy = _realloc(environ_cpy, old_len * sizeof(char *),
+			       (new_len) * sizeof(char *));
 	if (!environ_cpy)
 		return (NULL);
 

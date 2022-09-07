@@ -45,8 +45,7 @@ void print_number(int n);
 int word_len(char *str);
 int count_words(char *str);
 char **_arguments(char *str);
-int _str_upper(char *str);
-int _isupper(int c);
+char *_strdup(char *str);
 int check_token(char **str);
 int _atoi(char *s);
 char *_tostr(long unsigned int n);
@@ -67,7 +66,7 @@ char **_malloc2D(char **array_2D);
 void free_array2D(char **array_2D);
 
 /* environment related functions */
-char *_getenv(const char *name);
+char *_getenv(char *name);
 void _path_directories(void);
 lp *_path_directories_list(void);
 int _setenv(char *name, char *value);

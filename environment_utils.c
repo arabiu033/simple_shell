@@ -6,7 +6,7 @@
  *
  * Return: the value of the environments variable whose name was given
  */
-char *_getenv(const char *name)
+char *_getenv(char *name)
 {
 	int i, j, x;
 	char *delim = "=";
