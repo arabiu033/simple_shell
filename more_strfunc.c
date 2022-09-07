@@ -49,32 +49,23 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * _str-upper - Checks if a string is in uppercase
+ * _strdup - Creates a duplicate of a string on the heap
  * @str: The string
  *
- * Return: 1 if they are the same
+ * Return: The duplicated of str
  */
-int _str_upper(char *str)
+char *_strdup(char *str)
 {
-	int i;
+	int i, len;
+	char *dup;
 
+	len = _strlen(str);
+	dup = malloc(sizeof(char) * (len + 1));
+	if (dup == NULL)
+		return (NULL);
 	for (i = 0; str[i]; i++)
-	{
-		if (_isupper(str[i]) == 0)
-		    return (0);
-	}
+		dup[i] = str[i];
+	dup[i] = '\0';
 
-	return (1);
-}
-
-/**
- * _isupper - Checks for uppercase character
- * @c: Character
- * Return: 1 if uppercase, otherwise 0.
- */
-int _isupper(int c)
-{
-	if (c >= 65 && c <= 90)
-		return (1);
-	return (0);
+	return (dup);
 }

@@ -9,7 +9,7 @@ char *_which(char *str)
 {
 	lp *head;
 
-	if (*str == '/')
+	if (str[0] == '/')
 		return (str);
 
 	head = _path_directories_list();
@@ -26,7 +26,7 @@ char *_which(char *str)
  */
 char *_pathFinder(lp *home, char *str)
 {
-	int len, new_len;
+	int len, new_len = 0;
 	lp *head;
 	char *path;
 	struct stat st;
@@ -36,14 +36,14 @@ char *_pathFinder(lp *home, char *str)
 	{
 		len = _strlen(head->s);
 
-		path = strdup(head->s);
+		path = _strdup(head->s);
 		if (!path)
 		{
 			free_list(home);
 			return (NULL);
 		}
 		new_len = len + 2;
-		path = _realloc(path, sizeof(char) * len, sizeof(char) * new_len);
+		path = _realloc(path, sizeof(char) * (len + 1), sizeof(char) * new_len);
 		if (!path)
 		{
 			free_list(home);
@@ -66,7 +66,6 @@ char *_pathFinder(lp *home, char *str)
 		head = head->next;
 		free(path);
 	}
-
 	return (str);
 }
 

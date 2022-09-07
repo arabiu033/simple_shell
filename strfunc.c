@@ -25,7 +25,7 @@ int _strlen(char *s)
  */
 char *_strchr(char *s, char c)
 {
-	int i;
+	int i = 0;
 
 	for (i = 0; *(s + i); i++)
 	{
@@ -98,7 +98,7 @@ char *_strcat(char *dest, char *src)
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i;
+	int i = 0;
 
 	for (i = 0; src[i] != '\0'; i++)
 		dest[i] = src[i];
