@@ -22,7 +22,7 @@ void handle_sigint(__attribute__((unused)) int signum)
 int main(int argc, char **argv)
 {
 	char **args, *cmd, *s;
-	int fd = 0, ex, x = 1, a;
+	int fd = 0, ex, x = 1, a, len_cmd;
 	ssize_t p;
 	pid_t fork_process;
 	struct stat st;
@@ -46,7 +46,9 @@ int main(int argc, char **argv)
 		if (isatty(fd))
 			_puts("($) ");
 
+here:
 		p = _getline(fd, &cmd);
+		len_cmd = 1 * _strlen(cmd);
 		if (p == 1)
 			continue;
 
@@ -90,6 +92,9 @@ int main(int argc, char **argv)
 		{
 			error_message(x - 1, argv[0], args[0]);
 			free_array2D(args);
+			if (p != len_cmd)
+				goto here;
+			continue;
 			continue;
 		}
 
@@ -104,6 +109,8 @@ int main(int argc, char **argv)
 
 		wait(NULL);
 		free_array2D(args);
+		if (p != len_cmd)
+			goto here;
 	}
 	if (args[1])
 	{
