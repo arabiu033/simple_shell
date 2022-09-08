@@ -3,7 +3,7 @@
 void Sdummy(void);
 /**
  * _getline - for reading input from stram and files
- * @cmd_ptr: buffer to store the string captured
+ * @cmd_ptr: buffer to store the string captured.
  * @fd: where to capture the string
  * Return: n - size of the string
  */
