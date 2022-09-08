@@ -15,11 +15,12 @@ void handle_sigint(__attribute__((unused)) int signum)
  * main - contains the main function of the program
  * @argc: Arguments passed into the CLI
  * @argv: Pointer to arguments string
+ * @envp: Array of environment variables
  *
  * Description: A simple shell
  * Return: Always 0
  */
-int main(int argc, char **argv)
+int main(int argc, char **argv, __attribute__ ((unused)) char **envp)
 {
 	char **args, *cmd, *s;
 	int fd = 0, ex, x = 1, a;
