@@ -23,7 +23,7 @@ char *_which(char *str)
  * _pathFinder - searches for the right path
  * @home: the head of the linked list
  * @str: the command passed
- * Return: full path is function is succesful
+ * Return: full path is function is succesfull
  */
 char *_pathFinder(lp *home, char *str)
 {
