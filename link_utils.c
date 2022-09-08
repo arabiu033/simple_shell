@@ -43,7 +43,7 @@ lp *linked_list(lp **head, const char *str)
  * free_list - frees a lp linked list
  * @head: pointer to the start of the list
  *
- * Return: void
+ * Return: void - nothing
  */
 void free_list(lp *head)
 {

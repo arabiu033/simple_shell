@@ -4,7 +4,7 @@ void cd_dum(void);
 char *lwd = NULL;
 
 /**
- * _cd - change working directory
+ * _cd - change working directory to the new path
  * @path: path to change to
  * Return: 0 - success
  */

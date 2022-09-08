@@ -21,7 +21,7 @@ int _strlen(char *s)
  * @s: the string
  * @c: the character
  *
- * Return: a pointer to the first occurence of the character
+ * Return: a pointer to the first occurence of the character passed
  */
 char *_strchr(char *s, char c)
 {

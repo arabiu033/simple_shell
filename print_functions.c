@@ -48,7 +48,7 @@ void error_message(int p, char *s, char *cmd)
 }
 
 /**
- * invalid_file - printts error message if file does not exist
+ * invalid_file - prints error message if file does not exist
  * @s1: the shell name
  * @s2: the shell first argument (filename)
  */
