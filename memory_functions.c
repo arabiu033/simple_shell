@@ -44,7 +44,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 /**
  * _malloc2D - Creates a malloc copy of a 2D array
- * @array_2D: The 2D array to copy
+ * @array_2D: The 2D array to copy and return
  *
  * Return: The malloc copy of array_2D
  */
