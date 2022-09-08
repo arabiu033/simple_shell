@@ -4,7 +4,7 @@ void env_dum(void);
 
 /**
  * _getenv - gets the value of an environment variable
- * @name: name of the environment variable
+ * @name: name of the environment variables
  *
  * Return: the value of the environments variable whose name was given
  */
