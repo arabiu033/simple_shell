@@ -2,7 +2,7 @@
 
 void Cdummy(void);
 /**
- * _atoi - int
+ * _atoi - turn string to int
  * @s: pointer
  * Return: int.
  */
