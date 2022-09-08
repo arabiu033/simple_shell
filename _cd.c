@@ -89,7 +89,7 @@ char **c = NULL;
  * free_cd - free the memory allocatio by cd
  * @lwd: last working directory
  * @cwd: current working directory
- * Return: void nothing
+ * Return: void - nothing
  */
 void free_cd(char **lwd, char **cwd)
 {
