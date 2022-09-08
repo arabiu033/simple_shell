@@ -35,7 +35,7 @@ int _putchar(char c)
  * error_message - prints error message for invalid command
  * @p: process number
  * @s: the shell name
- * @s: t\The command passed
+ * @cmd: t\The command passed
  */
 void error_message(int p, char *s, char *cmd)
 {

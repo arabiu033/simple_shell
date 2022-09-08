@@ -73,7 +73,7 @@ char *_pathFinder(lp *home, char *str)
 lp *home = NULL;
 /**
  * free_which - free the linked list used by which
- * @list: the linked-list
+ * @head: the linked-list
  * @sig: signal when to free it
  * Return: void - nothing
  */
