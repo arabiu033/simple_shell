@@ -8,7 +8,7 @@ void dummy(void);
  */
 void handle_sigint(__attribute__((unused)) int signum)
 {
-	_puts("\n($) ");
+	_puts("\n$ ");
 }
 
 /**
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 	{
 		++x;
 		if (isatty(fd))
-			_puts("($) ");
+			_puts("$ ");
 
 		p = _getline(fd, &cmd);
 		if (p == 1)
