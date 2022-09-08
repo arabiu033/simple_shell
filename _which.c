@@ -4,7 +4,7 @@ void Vdummy(void);
 /**
  * _which - replicating the normal shell which
  * @str: passed command to work on
- * Return: full path of the command if exist
+ * Return: full path of the command if exist.
  */
 char *_which(char *str)
 {
