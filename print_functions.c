@@ -39,7 +39,7 @@ int _putchar(char c)
  */
 void error_message(int p, char *s, char *cmd)
 {
-	_puts(s);
+	_puts(cmd);
 	_puts(": ");
 	print_number(p);
 	_puts(": ");
