@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _puts - prints a string to stdout
+ * _puts - prints a string to stdout output
  * @str: The string
  */
 
