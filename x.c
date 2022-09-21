@@ -1,1 +1,5 @@
-#include "shell.h"
+#include <stdlib.h>
+
+void dummy(void)
+{
+}
