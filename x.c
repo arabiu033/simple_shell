@@ -1,5 +1,1 @@
-#include <stdlib.h>
-
-void dummy(void)
-{
-}
+#include "shell.h"
