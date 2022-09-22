@@ -52,5 +52,5 @@ ssize_t _getline(int fd, char **cmd_ptr)
 			   new_size * sizeof(char));
 	commands[len] = '\0';
 	*cmd_ptr = commands;
-	return (len);
+	return (len + 1);
 }
