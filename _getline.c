@@ -39,8 +39,6 @@ ssize_t _getline(int fd, char **cmd_ptr)
 				return (0);
 			if (c == '\n')
 				break;
-			if (c == ';')
-				break;
 			commands[len++] = c;
 		}
 	}
@@ -52,5 +50,5 @@ ssize_t _getline(int fd, char **cmd_ptr)
 			   new_size * sizeof(char));
 	commands[len] = '\0';
 	*cmd_ptr = commands;
-	return (len + 1);
+	return (len);
 }
