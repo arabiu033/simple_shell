@@ -8,7 +8,7 @@
  */
 ssize_t _getline(int fd, char **cmd_ptr)
 {
-	char c;
+	char c = '\0';
 	ssize_t n, len = 0, new_size, old_size;
 	static char *commands;
 
