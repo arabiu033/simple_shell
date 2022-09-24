@@ -59,6 +59,8 @@ int main(int argc, char **argv)
 		}
 		args = _arguments(cmd);
 		free(cmd);
+		if (!args)
+		  return (0);
 
 		for (a = 0; args[a]; a++)
 		{
