@@ -207,4 +207,4 @@ In this mode, the shell should not print a prompt and should not read from `stdi
 ### Authors &copy;
 
 - Abdullateef Odufeso
-- Aminu Rabiu
+- Aminu Rabi
