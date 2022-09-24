@@ -91,7 +91,8 @@ int main(int argc, char **argv)
 			args[0] = s;
 		else
 		{
-			error_message(x - 1, argv[0], args[0]);
+			/* error_message(x - 1, argv[0], args[0]); */
+			perror(argv[0]);
 			free_array2D(args);
 			continue;
 		}
