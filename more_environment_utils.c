@@ -10,30 +10,30 @@
 char **add_environment(char *name, char *value)
 {
 	int old_len, new_len, len, a, i;
-	char **environ_cpy;
 
-	environ_cpy = _malloc2D(environ);
 	for (old_len = 1; environ[old_len]; old_len++)
 		;
 	new_len = old_len + 1;
-	environ_cpy = _realloc(environ_cpy, old_len * sizeof(char *), (new_len) * sizeof(char *));
-	if (!environ_cpy)
+	environ = _realloc(environ, old_len * sizeof(char *),
+			       (new_len) * sizeof(char *));
+	if (!environ)
 		return (NULL);
 
-	environ_cpy[old_len] = NULL;
+	environ[old_len] = NULL;
 	len = _strlen(name) + _strlen(value) + 2;
-	environ_cpy[old_len - 1] = malloc(len * sizeof(char));
-	if (!environ_cpy[old_len - 1])
+	environ[old_len - 1] = malloc(len * sizeof(char));
+	if (!environ[old_len - 1])
 		return (NULL);
 
 	for (a = 0; name[a]; a++)
-		environ_cpy[old_len - 1][a] = name[a];
-	environ_cpy[old_len - 1][a] = '=';
+		environ[old_len - 1][a] = name[a];
+	environ[old_len - 1][a] = '=';
 	a++;
 	for (i = 0; value[i]; i++, a++)
-		environ_cpy[old_len - 1][a] = value[i];
-	environ_cpy[old_len - 1][a] = '\0';
-	return (environ_cpy);
+		environ[old_len - 1][a] = value[i];
+	environ[old_len - 1][a] = '\0';
+
+	return (environ);
 }
 
 /**
@@ -75,6 +75,8 @@ char **remove_environment(int rmv)
 		}
 		j++;
 	}
+	free_array2D(environ);
+	environ = new_environ;
 
-	return (new_environ);
+	return (environ);
 }
