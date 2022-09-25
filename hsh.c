@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, handle_sigint);
-
+	_which(".");
 	if (argc >= 2)
 	{
 		fd = open(argv[1], O_RDONLY);
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 		args = _arguments(cmd);
 		free(cmd);
 		if (!args)
-		  return (0);
+		  continue;
 
 		for (a = 0; args[a]; a++)
 		{
