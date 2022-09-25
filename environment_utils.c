@@ -20,8 +20,8 @@ char *_getenv(const char *name)
 	str = _strcat(_strcpy(str, (char *) name), "=");
 	while (environ[i])
 	{
-		s = _strstr(environ[i], str) && environ[i][0] == str[0] ?
-			_strstr(environ[i], str) : NULL;
+		s = strstr(environ[i], str) && environ[i][0] == str[0] ?
+			strstr(environ[i], str) : NULL;
 
 		if (s)
 		{
