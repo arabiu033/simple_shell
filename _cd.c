@@ -31,6 +31,7 @@ int _cd(char *path)
 	{
 		path = _getenv("HOME");
 		x = chdir(path);
+		free(path);
 		if (x && chdir_error(path))
 		{
 		    free(cwp);
@@ -123,6 +124,6 @@ void free_cd(char **lwd)
  */
 void update_pwd(char *path)
 {
-  /*_setenv("PWD", path);*/
+  _setenv("PWD", path);
 	free(path);
 }

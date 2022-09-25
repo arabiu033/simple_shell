@@ -40,7 +40,10 @@ char *_strtok(char *str, const char *delim)
 		}
 	}
 	if (!t)
+	  {
+	    free(holder);
 		holder = NULL;
+	  }
 
 	return (token);
 }
