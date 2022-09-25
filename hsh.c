@@ -29,6 +29,7 @@ int main(int argc, char **argv)
 	
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, handle_sigint);
+	_which(".");
 
 	if (argc >= 2)
 	{
