@@ -27,9 +27,9 @@ int main(int argc, char **argv)
 	pid_t fork_process;
 	struct stat st;
 	
-	environ = _malloc2D(environ);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, handle_sigint);
+	_which(".");
 
 	if (argc >= 2)
 	{
