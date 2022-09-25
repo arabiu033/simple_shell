@@ -49,7 +49,7 @@ char *_pathFinder(lp *home, char *str)
 			free_list(home);
 			return (NULL);
 		}
-		path = (_strcat(path, "/"));
+		path = (strcat(path, "/"));
 		len = new_len;
 		new_len = len + _strlen(str);
 		path = _realloc(path, sizeof(char) * len, sizeof(char) * new_len);
@@ -58,7 +58,7 @@ char *_pathFinder(lp *home, char *str)
 			free_list(home);
 			return (NULL);
 		}
-		path = (_strcat(path, str));
+		path = (strcat(path, str));
 
 		if (!stat(path, &st))
 			return (path);

@@ -21,20 +21,32 @@ int _cd(char *path)
 	{
 		x = chdir(path);
 		if (x && chdir_error(path))
-			return (x);
+		{
+		    free(cwp);
+		    free(lwd);
+		    return (x);
+		}
 	}
 	else if (!path || (path && _strlen(path) == 1 && *path == '~'))
 	{
 		path = _getenv("HOME");
 		x = chdir(path);
 		if (x && chdir_error(path))
-			return (x);
+		{
+		    free(cwp);
+		    free(lwd);
+		    return (x);
+		} 
 	}
 	else if (path && (_strlen(path) == 1) && *path == '-')
 	{
 		x = chdir(lwd);
 		if (x && chdir_error(lwd))
-			return (x);
+		  {
+		    free(cwp);
+		    free(lwd);
+		    return (x);
+		  }
 	}
 	else if (path && *path != '/')
 	{
@@ -62,9 +74,10 @@ int _cd(char *path)
 		free(lwd);
 		lwd = strdup(cwp);
 		free(cwp);
-		free_cd(&lwd, &cwp);
+		free_cd(&lwd);
 		buf = malloc(sizeof(char) * 512);
 		update_pwd(getcwd(buf, 512));
+
 	}
 	return (x);
 
@@ -88,20 +101,18 @@ int chdir_error(char *path)
  * @sig: signal the function what to do
  * Return: void nothing
  */
-void free_cd(char **lwd, char **cwd)
+void free_cd(char **lwd)
 {
 	static char **l = NULL;
-	static char **c = NULL;
 
-	if (lwd && cwd)
+	if (lwd)
 	{
 		l = lwd;
-		c = cwd;
 		return;
 	}
 
 	free(*l);
-	free(*c);
+	*l = NULL;
 }
 
 /**
@@ -112,6 +123,6 @@ void free_cd(char **lwd, char **cwd)
  */
 void update_pwd(char *path)
 {
-	_setenv("PWD", path);
+  /*_setenv("PWD", path);*/
 	free(path);
 }

@@ -86,7 +86,7 @@ void free_list(lp *head);
 /* cd related functions */
 int _cd(char *path);
 int chdir_error(char *path);
-void free_cd(char **lwd, char **cwd);
+void free_cd(char **lwd);
 void update_pwd(char *path);
 
 #endif /* #define _SHELL_H_ */

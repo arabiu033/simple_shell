@@ -129,7 +129,10 @@ int check_token(char **str)
 		return (0);
 
 	else if (!(_strcmp(str[0], "cd")))
+	  {
 		str[1] ? _cd(str[1]) : _cd(NULL);
+		free_cd(NULL);
+	  }
 
 	else if (!(strcmp(str[0], "echo")) && str[1])
 		return (2);
