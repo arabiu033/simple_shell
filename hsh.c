@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	environ = _malloc2D(environ);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, handle_sigint);
-	_which(".");
+
 	if (argc >= 2)
 	{
 		fd = open(argv[1], O_RDONLY);
